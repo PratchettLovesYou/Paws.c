@@ -10,38 +10,38 @@
  *  You should never have a reason to include or use this file; it’s already included everywhere it is necessary.
  */
 
-        struct E(list);
-typedef struct E(list)* E(list);
+        struct e(list);
+typedef struct e(list)* e(list);
 
-        struct E(routine);
-typedef struct E(routine)* E(routine);
+        struct e(routine);
+typedef struct e(routine)* e(routine);
 
-        struct E(execution);
-typedef struct E(execution)* E(execution);
+        struct e(execution);
+typedef struct e(execution)* e(execution);
 
-        struct E(numeric);
-typedef struct E(numeric)* E(numeric);
+        struct e(numeric);
+typedef struct e(numeric)* e(numeric);
 
-        struct E(string);
-typedef struct E(string)* E(string);
+        struct e(string);
+typedef struct e(string)* e(string);
 
 
-        struct E(thing); // A union representing a pointer to *any* core Paws datatype
-typedef struct E(thing) E(thing); /*
-typedef   enum E(kind) E(kind); // ISO C forbids forward references to 'enum' types. YAY. >,< */
+        struct e(thing); // A union representing a pointer to *any* core Paws datatype
+typedef struct e(thing) e(thing); /*
+typedef   enum e(kind) e(kind); // ISO C forbids forward references to 'enum' types. YAY. >,< */
 
-struct E(thing) {
-  union /* E(thing_pointers) */ {
+struct e(thing) {
+  union /* e(thing_pointers) */ {
     void         *unknown;
     
-    E(list)       list;
-    E(routine)    routine;
-    E(execution)  execution;
-    E(numeric)    numeric;
-    E(string)     string;
+    e(list)       list;
+    e(routine)    routine;
+    e(execution)  execution;
+    e(numeric)    numeric;
+    e(string)     string;
   } const pointer;
   
-  enum E(kind) {
+  enum e(kind) {
     E(UNKNOWN) = 0,
     
     E(LIST),
@@ -52,6 +52,6 @@ struct E(thing) {
   } const isa;
 };
 
-typedef   enum E(kind) E(kind); // See above
+typedef   enum e(kind) e(kind); // See above
 
 # endif

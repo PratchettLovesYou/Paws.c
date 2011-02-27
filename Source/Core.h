@@ -10,14 +10,16 @@
 
 /*  This macro is defined in one of two ways: if one or more Paws headers are
  *  included manually, or if `INTERNALIZE` is defiend (see `Paws.c`), then the
- *  `E()` macro has no effect (the name is not transformed.) However, if one
+ *  `e()` macro has no effect (the name is not transformed.) However, if one
  *  includes the entire Paws header-set at once (via `#include "Paws.c"`), then
- *  `EXTERNALIZE` will be set, thus causing `E()` to, well, make names safe for
+ *  `EXTERNALIZE` will be set, thus causing `e()` to, well, make names safe for
  *  externalization. */
 # if defined(EXTERNALIZE)
-#   define E(NAME) Paws__ ## NAME
+#   define e(NAME) Paws__ ## NAME
+#   define E(NAME) e(NAME)
 # else
-#   define E(NAME) NAME
+#   define e(NAME) NAME
+#   define E(NAME) e(NAME)
 # endif
 
 // FIXME: It seems this is broken, at least in `clang`
