@@ -4,54 +4,48 @@
 # include "Core.h"
 
 
-/*  This file exists simply to forward-declare some structs and types used throughout the rest of the Paws.c
- *  codebase (including the `thing` union-struct).
+/*  This file forward-declares the two fundamental nuketypes absolutely essential to the operation of Paws’
+ *  Nucleus: `struct fork` and `struct execution`. Other nuketypes are encapsulated in nuclear extensions (see
+ *  the contents of the `Source/Nuclear Extensions/` directory), some of which are shipped with the `Paws.c`
+ *  distribution, and some of which Paws.c will not even (sanely) compile without.
  *  
- *  You should never have a reason to include or use this file; it’s already included everywhere it is necessary.
+ *  Equally importantly, this file defines the `thing` struct utilized throughout the `Paws.c` codebase to
+ *  represent objects of any Paws nuketype. This struct encapsulates an arbitrary pointer (pointing to the heap-
+ *  space allocated for the storage of an instance of some Paws nuketype) as well as a pointer to a
+ *  `struct typeRepresentation` instance.
+ *  
+ *  `struct typeRepresentation` instances are registered by n’exts when the interpreter initially bootstraps
+ *  itself. They are subsequentially a static pointer, and direct pointer comparison is used to determine if a
+ *  given `thing` is of the type required for a given purpose or function. The information they contain is only
+ *  useful for debugging purposes, and they are generally never dereferenced; the pointer to their instance only
+ *  acts as a dynamically-generated unique identifier at runtime.
+ *  
+ *  This file is already included everywhere it is relevant. It is very unlikely that you, as an API consumer,
+ *  will have a reason to electively include this file yourself.
  */
 
         struct e(list);
 typedef struct e(list)* e(list);
 
-        struct e(routine);
-typedef struct e(routine)* e(routine);
-
         struct e(execution);
 typedef struct e(execution)* e(execution);
 
-        struct e(numeric);
-typedef struct e(numeric)* e(numeric);
 
-        struct e(string);
-typedef struct e(string)* e(string);
+        struct e(thing);
+typedef struct e(thing) e(thing);
+
+        struct e(typeRepresentation);
+typedef struct e(typeRepresentation) e(typeRepresentation);
 
 
-        struct e(thing); // A union representing a pointer to *any* core Paws datatype
-typedef struct e(thing) e(thing); /*
-typedef   enum e(kind) e(kind); // ISO C forbids forward references to 'enum' types. YAY. >,< */
-
-struct e(thing) {
-  union /* e(thing_pointers) */ {
-    void         *unknown;
-    
-    e(list)       list;
-    e(routine)    routine;
-    e(execution)  execution;
-    e(numeric)    numeric;
-    e(string)     string;
-  } const pointer;
-  
-  enum e(kind) {
-    E(UNKNOWN) = 0,
-    
-    E(LIST),
-    E(ROUTINE),
-    E(EXECUTION),
-    E(NUMERIC),
-    E(STRING)
-  } const isa;
+struct e(typeRepresentation) {
+  e(pointer)                    family;
+  char                          name[64];
 };
 
-typedef   enum e(kind) e(kind); // See above
+struct e(thing) {
+  e(pointer) const              pointer;
+  e(typeRepresentation) const   isa;
+};
 
 # endif

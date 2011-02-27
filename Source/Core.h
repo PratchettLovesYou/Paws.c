@@ -22,6 +22,9 @@
 #   define E(NAME) e(NAME)
 # endif
 
+/* Yes, I’m a pedant. Get over it. */
+typedef void* e(pointer);
+
 // FIXME: It seems this is broken, at least in `clang`
 // # if       __has_feature(attribute_constructor)
 #   define constructor __attribute__((constructor))
