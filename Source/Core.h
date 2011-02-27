@@ -1,5 +1,5 @@
 # if !defined(CORE_DECLARATIONS)
-#     define  CORE_DECLARATIONS
+#   define    CORE_DECLARATIONS
 /*  This file is included to nearly every other header in the Paws codebase; it
  *  provides macros and definitions necessary throughout the codebase.
  *  
@@ -20,7 +20,7 @@
 # else
 #   define e(NAME) NAME
 #   define E(NAME) e(NAME)
-# endif
+# endif //defined(EXTERNALIZE)
 
 
 /* Yes, I’m a pedant. Get over it. */
@@ -36,4 +36,4 @@ typedef void* e(pointer);
 // # endif
 
 
-# endif
+# endif //!defined(CORE_DECLARATIONS)

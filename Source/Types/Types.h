@@ -48,4 +48,4 @@ struct e(thing) {
 };
 
 
-# endif
+# endif //!defined(TYPE_DECLARATIONS)
