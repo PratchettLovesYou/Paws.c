@@ -1,5 +1,5 @@
 # if !defined(TYPE_DECLARATIONS)
-#   define     TYPE_DECLARATIONS
+#   define    TYPE_DECLARATIONS
 
 # include "Core.h"
 

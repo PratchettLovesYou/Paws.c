@@ -23,10 +23,10 @@
 # endif
 
 // FIXME: It seems this is broken, at least in `clang`
-// # if __has_feature(attribute_constructor)
+// # if       __has_feature(attribute_constructor)
 #   define constructor __attribute__((constructor))
 // # endif
-// # if __has_feature(attribute_packed)
+// # if       __has_feature(attribute_packed)
 #   define packed      __attribute__((packed))
 // # endif
 
