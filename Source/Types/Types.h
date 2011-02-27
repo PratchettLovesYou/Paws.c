@@ -4,10 +4,10 @@
 # include "Core.h"
 
 
-/* This file exists simply to forward-declare some structs and types used throughout the rest of the Paws.c
- * codebase (including the `thing` union-struct).
- * 
- * You should never have a reason to include or use this file; it’s already included everywhere it is necessary.
+/*  This file exists simply to forward-declare some structs and types used throughout the rest of the Paws.c
+ *  codebase (including the `thing` union-struct).
+ *  
+ *  You should never have a reason to include or use this file; it’s already included everywhere it is necessary.
  */
 
         struct E(list);
