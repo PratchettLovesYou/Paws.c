@@ -26,7 +26,7 @@ typedef struct E(numeric)* E(numeric);
 typedef struct E(string)* E(string);
 
 
-        struct E(thing); /* A union representing a pointer to *any* core Paws datatype */
+        struct E(thing); // A union representing a pointer to *any* core Paws datatype
 typedef struct E(thing) E(thing); /*
 typedef   enum E(kind) E(kind); // ISO C forbids forward references to 'enum' types. YAY. >,< */
 
