@@ -1,5 +1,5 @@
-#if !defined(CORE_DECLARATIONS)
-# define     CORE_DECLARATIONS
+# if !defined(CORE_DECLARATIONS)
+#     define  CORE_DECLARATIONS
 
 /* This file is included to nearly every other header in the Paws codebase; it
  * provides macros and definitions necessary throughout the codebase.
@@ -15,20 +15,18 @@
  * includes the entire Paws header-set at once (via `#include "Paws.c"`), then
  * `EXTERNALIZE` will be set, thus causing `E()` to, well, make names safe for
  * externalization. */
-#if defined(EXTERNALIZE)
-# define E(NAME) \
-    Paws__ ## NAME
-#else
-# define E(NAME) \
-    NAME
-#endif
+# if defined(EXTERNALIZE)
+#   define E(NAME) Paws__ ## NAME
+# else
+#   define E(NAME) NAME
+# endif
 
 // FIXME: It seems this is broken, at least in `clang`
-// #if __has_feature(attribute_constructor)
-# define constructor __attribute__((constructor))
-// #endif
-// #if __has_feature(attribute_packed)
-# define packed      __attribute__((packed))
-// #endif
+// # if __has_feature(attribute_constructor)
+#   define constructor __attribute__((constructor))
+// # endif
+// # if __has_feature(attribute_packed)
+#   define packed      __attribute__((packed))
+// # endif
 
-#endif
+# endif

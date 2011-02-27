@@ -1,7 +1,7 @@
-#if !defined(TYPE_DECLARATIONS)
-# define     TYPE_DECLARATIONS
+# if !defined(TYPE_DECLARATIONS)
+#   define     TYPE_DECLARATIONS
 
-#include "Core.h"
+# include "Core.h"
 
 
 /* This file exists simply to forward-declare some structs and types used throughout the rest of the Paws.c
@@ -54,4 +54,4 @@ struct E(thing) {
 
 typedef   enum E(kind) E(kind); // See above
 
-#endif
+# endif
