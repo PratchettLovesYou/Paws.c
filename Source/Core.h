@@ -35,10 +35,14 @@ typedef void* e(pointer);
 
 #   if __has_attribute(constructor)
 #     define __constructor __attribute__((constructor))
+#   else
+#     define __constructor
 #   endif //__has_attribute(constructor)
 
 #   if __has_attribute(packed)
 #     define __packed __attribute__((packed))
+#   else
+#     define __packed
 #   endif //__has_attribute(packed)
 
 # if defined(has_no_has_attribute)
