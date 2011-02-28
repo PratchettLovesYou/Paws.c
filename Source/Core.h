@@ -7,6 +7,7 @@
  *  everywhere it is necessary.
  */
 
+# define ALWAYS_EXTERNALIZE(NAME) Paws__ ## NAME
 
 /*  This macro is defined in one of two ways: if one or more Paws headers are
  *  included manually, or if `INTERNALIZE` is defiend (see `Paws.c`), then the
@@ -15,7 +16,7 @@
  *  `EXTERNALIZE` will be set, thus causing `e()` to, well, make names safe for
  *  externalization. */
 # if defined(EXTERNALIZE)
-#   define e(NAME) Paws__ ## NAME
+#   define e(NAME) ALWAYS_EXTERNALIZE(NAME)
 #   define E(NAME) e(NAME)
 # else
 #   define e(NAME) NAME
