@@ -28,13 +28,23 @@
 typedef void* e(pointer);
 
 
-// FIXME: It seems this is broken, at least in `clang`
-// # if       __has_feature(attribute_constructor)
-#   define constructor __attribute__((constructor))
-// # endif
-// # if       __has_feature(attribute_packed)
-#   define packed      __attribute__((packed))
-// # endif
+# if !defined(__has_attribute)
+#   define has_no_has_attribute
+#   define __has_attribute(x) 0
+# endif //!defined(__has_attribute)
+
+#   if __has_attribute(constructor)
+#     define __constructor __attribute__((constructor))
+#   endif //__has_attribute(constructor)
+
+#   if __has_attribute(packed)
+#     define __packed __attribute__((packed))
+#   endif //__has_attribute(packed)
+
+# if defined(has_no_has_attribute)
+#   undef has_no_has_attribute
+#   undef __has_attribute
+# endif //!defined(__has_attribute)
 
 
 # endif //!defined(CORE_DECLARATIONS)
