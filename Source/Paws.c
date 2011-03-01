@@ -79,7 +79,7 @@
  *  From here, you can start learning more about the various nuketypes that ship with `Paws.c` and the associated
  *  families of functions. Just start looking through the files in `Types/`. In addition, there are several APIs
  *  and datatypes utilized throughout the codebase that aren’t themselves nuketypes; these can be found in
- *  `Ancilliary/`.
+ *  `Ancillary/`.
  */
 
 
@@ -111,7 +111,7 @@
 
 struct Paws {
   // Families ==== === ====
-  /// Ancilliary families
+  /// Ancillary families
   struct E(Threading)    *Threading;
   struct E(Unit)         *Unit;
   
