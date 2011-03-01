@@ -1,0 +1,3 @@
+[submodule "Vendor/Cest.c"]
+	path = Vendor/Cest.c
+	url = git://github.com/elliottcable/Cest.c.git
