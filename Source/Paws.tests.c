@@ -15,4 +15,4 @@
 
 // This simply constructs the Paws environment (incase you’re not building on `clang` and
 // `__attribute__((constructor))` isn’t available... see the discussion in `Paws.c` at `construct()`)
-int main() { construct(); return Cest.run_all(); }
+int extern main() { construct(); return Cest.run_all(); }

@@ -122,15 +122,13 @@ struct Paws {
   /// Core nuclear extensions’ families
   struct E(Number)       *Number;
   struct E(Label)        *Label;
-};
-struct Paws extern *Paws;
+} // »
+extern *Paws;
 
 
-void        e(construct)      (void);
-void    Paws__register_Paws   (void);
+void    extern e(construct)   (void);
 
-
-bool extern   ALWAYS_EXTERNALIZE(constructed); // (see `void construct(void)` below.)
+bool    extern ALWAYS_EXTERNALIZE(constructed); // (see `void construct(void)` below.)
 
 
 
@@ -145,7 +143,7 @@ bool extern   ALWAYS_EXTERNALIZE(constructed); // (see `void construct(void)` be
 
 
 struct Paws *   Paws = NULL;
-void Paws__register_Paws(void) { Paws = malloc(sizeof(struct Paws));
+void static Paws__register_Paws(void) { Paws = malloc(sizeof(struct Paws));
   
   struct Paws // »
   data = {
@@ -178,7 +176,7 @@ void Paws__register_Paws(void) { Paws = malloc(sizeof(struct Paws));
  *  has already been constructed.
  */
 bool    ALWAYS_EXTERNALIZE(constructed) = false;
-void __constructor e(construct)(void) {
+void extern __constructor e(construct)(void) {
   if ( !ALWAYS_EXTERNALIZE(constructed) ) // »
     Paws__register_Paws();
   
