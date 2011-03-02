@@ -133,8 +133,8 @@ bool    extern ALWAYS_EXTERNALIZE(constructed); // (see `void construct(void)` b
 
 
 # endif //!defined(PAWS_DECLARATIONS)
-# if !defined(DECLARATIONS) && !defined(PAWS_IMPLEMENTATION) /* ========================================= BODY */
-#   define                              PAWS_IMPLEMENTATION
+# if !defined(PAWS_IMPLEMENTATION) && !defined(DECLARATIONS) /* ========================================= BODY */
+#   define    PAWS_IMPLEMENTATION
 
 # define DECLARATIONS
 #   include <stdlib.h>
@@ -184,4 +184,4 @@ void extern __constructor e(construct)(void) {
 }
 
 
-# endif //!defined(DECLARATIONS) && !defined(PAWS_IMPLEMENTATION)
+# endif //!defined(PAWS_IMPLEMENTATION) && !defined(DECLARATIONS)
