@@ -1,31 +1,26 @@
 # if !defined(CORE_DECLARATIONS)
 #   define    CORE_DECLARATIONS
-/*  This file is included to nearly every other header in the Paws codebase; it
- *  provides macros and definitions necessary throughout the codebase.
+/*  This file is included to nearly every other header in the Paws codebase; it provides macros and definitions
+ *  necessary throughout the codebase.
  *  
- *  You should never have a reason to include or use this file; it’s included
- *  everywhere it is necessary.
+ *  You should never have a reason to include or use this file; it’s included everywhere it is necessary.
  */
 
 
-/*  This macro is defined in one of two ways: if one or more Paws headers are
- *  included manually, or if `INTERNALIZE` is defiend (see `Paws.c`), then the
- *  `e()` macro has no effect (the name is not transformed.) However, if one
- *  includes the entire Paws header-set at once (via `#include "Paws.c"`), then
- *  `EXTERNALIZE` will be set, thus causing `e()` to, well, make names safe for
- *  externalization.
+/*  This macro is defined in one of two ways: if one or more Paws headers are included manually, or if
+ *  `INTERNALIZE` is defiend (see `Paws.c`), then the `e()` macro has no effect (the name is not transformed.)
+ *  However, if one includes the entire Paws header-set at once (via `#include "Paws.c"`), then `EXTERNALIZE`
+ *  will be set, thus causing `e()` to, well, make names safe for externalization.
  *  
- *  By contrast, `EXTERNIFY()` will *always* `EXTERNALIZE` a snippet of code as
- *  if `EXTERNALIZE` were set, whereas `INTERNIFY` will never externalize code
- *  (it’s a noop, provided for balance.)
+ *  By contrast, `EXTERNIFY()` will *always* `EXTERNALIZE` a snippet of code as if `EXTERNALIZE` were set,
+ *  whereas `INTERNIFY` will never externalize code (it’s a noop, provided for balance.)
  *  
- *  Generally speaking: `e()` gets used all over the `DECLARATIONS` section of
- *  a portion of code. However, if you need to universally consider something
- *  externalized, then you use `EXTERNIFY()` in *both* the `DECLARATIONS` and
- *  `IMPLEMENTATION` sections, consistently.
+ *  Generally speaking: `e()` gets used all over the `DECLARATIONS` section of a portion of code. However, if you
+ *  need to universally consider something externalized, then you use `EXTERNIFY()` in *both* the `DECLARATIONS`
+ *  and `IMPLEMENTATION` sections, consistently.
  *  
- *  Finally, `IF_EXTERNAL(some code)` will only be included if `EXTERNAL` is
- *  set, while `IF_INTERNAL(some code)` will only be compiled if it’s *not*.
+ *  Finally, `IF_EXTERNAL(some code)` will only be included if `EXTERNAL` is set, while `IF_INTERNAL(some code)`
+ *  will only be compiled if it’s *not*.
  */
 # define EXTERNIFY(NAME) Paws__ ## NAME
 # define INTERNIFY(NAME) NAME
