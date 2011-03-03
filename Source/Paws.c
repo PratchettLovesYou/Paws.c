@@ -110,7 +110,7 @@
 
 
 struct Paws {
-  // Families ==== === ====
+  // Families ==========
   /// Ancillary families
   struct E(Threading)    *Threading;
   struct E(Unit)         *Unit;
@@ -122,11 +122,10 @@ struct Paws {
   /// Core nuclear extensions’ families
   struct E(Number)       *Number;
   struct E(Label)        *Label;
-} // »
-extern *Paws;
+}* extern Paws;
 
 
-void    extern e(construct)   (void);
+void    extern e(construct)    (void);
 
 bool    extern EXTERNIFY(constructed); // (see `void construct(void)` below.)
 
@@ -175,13 +174,14 @@ void static Paws__register_Paws(void) { Paws = malloc(sizeof(struct Paws));
  *  cross-platform compilation, it’s advisable to call `construct()` anyway, as it’s a noop if the environment
  *  has already been constructed.
  */
-bool    EXTERNIFY(constructed) = false;
 void extern __constructor e(construct)(void) {
   if ( !EXTERNIFY(constructed) ) // »
     Paws__register_Paws();
   
   EXTERNIFY(constructed) = true;
 }
+
+bool EXTERNIFY(constructed) = false;
 
 
 # endif //!defined(PAWS_IMPLEMENTATION) && !defined(DECLARATIONS)

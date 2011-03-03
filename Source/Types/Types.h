@@ -23,28 +23,28 @@
  */
 
 
-        struct e(list);
-typedef struct e(list)* e(list);
+          struct e(list);
+typedef   struct e(list)*                 e(list);
 
-        struct e(execution);
-typedef struct e(execution)* e(execution);
+          struct e(execution);
+typedef   struct e(execution)*            e(execution);
 
 
-        struct e(thing);
-typedef struct e(thing) e(thing);
+          struct e(thing);
+typedef   struct e(thing)                 e(thing);
 
-        struct e(typeRepresentation);
-typedef struct e(typeRepresentation) e(typeRepresentation);
+          struct e(typeRepresentation);
+typedef   struct e(typeRepresentation)    e(typeRepresentation);
 
 
 struct e(typeRepresentation) {
-  e(pointer)                    family;
-  char                          name[64];
+e(pointer)                    family;
+  char                        name[64];
 };
 
 struct e(thing) {
-  e(pointer) const              pointer;
-  e(typeRepresentation) const   isa;
+e(pointer) const              pointer;
+e(typeRepresentation) const   isa;
 };
 
 
