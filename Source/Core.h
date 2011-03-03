@@ -12,22 +12,22 @@
  *  However, if one includes the entire Paws header-set at once (via `#include "Paws.c"`), then `EXTERNALIZE`
  *  will be set, thus causing `e()` to, well, make names safe for externalization.
  *  
- *  By contrast, `EXTERNIFY()` will *always* `EXTERNALIZE` a snippet of code as if `EXTERNALIZE` were set,
+ *  By contrast, `MAKE_EXTERNAL()` will *always* `EXTERNALIZE` a snippet of code as if `EXTERNALIZE` were set,
  *  whereas `INTERNIFY` will never externalize code (it’s a noop, provided for balance.)
  *  
  *  Generally speaking: `e()` gets used all over the `DECLARATIONS` section of a portion of code. However, if you
- *  need to universally consider something externalized, then you use `EXTERNIFY()` in *both* the `DECLARATIONS`
- *  and `IMPLEMENTATION` sections, consistently.
+ *  need to universally consider something externalized, then you use `MAKE_EXTERNAL()` in *both* the
+ *  `DECLARATIONS` and `IMPLEMENTATION` sections, consistently.
  *  
  *  Finally, `IF_EXTERNAL(some code)` will only be included if `EXTERNAL` is set, while `IF_INTERNAL(some code)`
  *  will only be compiled if it’s *not*.
  */
-# define EXTERNIFY(NAME) Paws__ ## NAME
-# define INTERNIFY(NAME) NAME
+# define MAKE_EXTERNAL(NAME) Paws__ ## NAME
+# define MAKE_INTERNAL(NAME) NAME
 
 # if defined(EXTERNALIZE)
-#   define e(NAME) EXTERNIFY(NAME)
-#   define E(NAME) EXTERNIFY(NAME)
+#   define e(NAME) MAKE_EXTERNAL(NAME)
+#   define E(NAME) MAKE_EXTERNAL(NAME)
 
 #   define IF_EXTERNAL(CODE) // fizzle
 #   define IF_INTERNAL(CODE) CODE

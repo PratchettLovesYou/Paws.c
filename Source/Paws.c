@@ -127,7 +127,7 @@ struct Paws {
 
 void    extern e(construct)    (void);
 
-bool    extern EXTERNIFY(constructed); // (see `void construct(void)` below.)
+bool    extern MAKE_EXTERNAL(constructed); // (see `void construct(void)` below.)
 
 
 
@@ -175,13 +175,13 @@ void static Paws__register_Paws(void) { Paws = malloc(sizeof(struct Paws));
  *  has already been constructed.
  */
 void extern __constructor e(construct)(void) {
-  if ( !EXTERNIFY(constructed) ) // »
+  if ( !MAKE_EXTERNAL(constructed) ) // »
     Paws__register_Paws();
   
-  EXTERNIFY(constructed) = true;
+  MAKE_EXTERNAL(constructed) = true;
 }
 
-bool EXTERNIFY(constructed) = false;
+bool MAKE_EXTERNAL(constructed) = false;
 
 
 # endif //!defined(PAWS_IMPLEMENTATION) && !defined(DECLARATIONS)
