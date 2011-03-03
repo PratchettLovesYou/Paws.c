@@ -128,7 +128,7 @@ extern *Paws;
 
 void    extern e(construct)   (void);
 
-bool    extern ALWAYS_EXTERNALIZE(constructed); // (see `void construct(void)` below.)
+bool    extern EXTERNIFY(constructed); // (see `void construct(void)` below.)
 
 
 
@@ -175,12 +175,12 @@ void static Paws__register_Paws(void) { Paws = malloc(sizeof(struct Paws));
  *  cross-platform compilation, it’s advisable to call `construct()` anyway, as it’s a noop if the environment
  *  has already been constructed.
  */
-bool    ALWAYS_EXTERNALIZE(constructed) = false;
+bool    EXTERNIFY(constructed) = false;
 void extern __constructor e(construct)(void) {
-  if ( !ALWAYS_EXTERNALIZE(constructed) ) // »
+  if ( !EXTERNIFY(constructed) ) // »
     Paws__register_Paws();
   
-  ALWAYS_EXTERNALIZE(constructed) = true;
+  EXTERNIFY(constructed) = true;
 }
 
 

@@ -7,20 +7,36 @@
  *  everywhere it is necessary.
  */
 
-# define ALWAYS_EXTERNALIZE(NAME) Paws__ ## NAME
 
 /*  This macro is defined in one of two ways: if one or more Paws headers are
  *  included manually, or if `INTERNALIZE` is defiend (see `Paws.c`), then the
  *  `e()` macro has no effect (the name is not transformed.) However, if one
  *  includes the entire Paws header-set at once (via `#include "Paws.c"`), then
  *  `EXTERNALIZE` will be set, thus causing `e()` to, well, make names safe for
- *  externalization. */
+ *  externalization.
+ *  
+ *  By contrast, `EXTERNIFY()` will *always* `EXTERNALIZE` a snippet of code as
+ *  if `EXTERNALIZE` were set, whereas `INTERNIFY` will never externalize code
+ *  (it’s a noop, provided for balance.)
+ *  
+ *  Finally, `IF_EXTERNAL(some code)` will only be included if `EXTERNAL` is
+ *  set, while `IF_INTERNAL(some code)` will only be compiled if it’s *not*.
+ */
+# define EXTERNIFY(NAME) Paws__ ## NAME
+# define INTERNIFY(NAME) NAME
+
 # if defined(EXTERNALIZE)
-#   define e(NAME) ALWAYS_EXTERNALIZE(NAME)
-#   define E(NAME) e(NAME)
+#   define e(NAME) EXTERNIFY(NAME)
+#   define E(NAME) EXTERNIFY(NAME)
+
+#   define IF_EXTERNAL(CODE) // fizzle
+#   define IF_INTERNAL(CODE) CODE
 # else
-#   define e(NAME) NAME
-#   define E(NAME) e(NAME)
+#   define e(NAME) INTERNIFY(NAME)
+#   define E(NAME) INTERNIFY(NAME)
+
+#   define IF_EXTERNAL(CODE) CODE
+#   define IF_INTERNAL(CODE) // fizzle
 # endif //defined(EXTERNALIZE)
 
 
