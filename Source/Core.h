@@ -20,8 +20,8 @@
  *  if you need to universally consider something externalized, then you use `MAKE_EXTERNAL()` in *both* the
  *  `DECLARATIONS` and `IMPLEMENTATION` sections, consistently.
  *  
- *  Finally, `IF_EXTERNAL(some code)` will only be included if `EXTERNAL` is set, while `IF_INTERNAL(some code)`
- *  will only be compiled if it’s *not*.
+ *  Finally, `IF_EXTERNALIZED(some code)` will only be included if `EXTERNALIZE` is set, while
+ *  `IF_INTERNALIZED(some code)` will only be compiled if it’s *not*.
  */
 # define MAKE_EXTERNAL(NAME) Paws__ ## NAME
 # define MAKE_INTERNAL(NAME) NAME
@@ -30,14 +30,14 @@
 #   define e(NAME) MAKE_EXTERNAL(NAME)
 #   define E(NAME) MAKE_EXTERNAL(NAME)
 
-#   define IF_EXTERNAL(CODE) // fizzle
-#   define IF_INTERNAL(CODE) CODE
+#   define IF_EXTERNALIZED(CODE) // fizzle
+#   define IF_INTERNALIZED(CODE) CODE
 # else
 #   define e(NAME) INTERNIFY(NAME)
 #   define E(NAME) INTERNIFY(NAME)
 
-#   define IF_EXTERNAL(CODE) CODE
-#   define IF_INTERNAL(CODE) // fizzle
+#   define IF_EXTERNALIZED(CODE) CODE
+#   define IF_INTERNALIZED(CODE) // fizzle
 # endif //defined(EXTERNALIZE)
 
 
