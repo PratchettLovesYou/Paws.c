@@ -19,6 +19,11 @@
  *  if `EXTERNALIZE` were set, whereas `INTERNIFY` will never externalize code
  *  (it’s a noop, provided for balance.)
  *  
+ *  Generally speaking: `e()` gets used all over the `DECLARATIONS` section of
+ *  a portion of code. However, if you need to universally consider something
+ *  externalized, then you use `EXTERNIFY()` in *both* the `DECLARATIONS` and
+ *  `IMPLEMENTATION` sections, consistently.
+ *  
  *  Finally, `IF_EXTERNAL(some code)` will only be included if `EXTERNAL` is
  *  set, while `IF_INTERNAL(some code)` will only be compiled if it’s *not*.
  */
