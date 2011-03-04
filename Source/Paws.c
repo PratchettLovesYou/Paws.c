@@ -153,8 +153,7 @@ void static Paws__register_Paws(void) { Paws = malloc(sizeof(struct Paws));
     .Execution    = NULL,
     
     .Number       = NULL,
-    .Label        = NULL
-  };
+    .Label        = NULL };
   
   memcpy(Paws, &data, sizeof(struct Paws));
   
@@ -178,8 +177,7 @@ void extern __constructor e(construct)(void) {
   if ( !MAKE_EXTERNAL(constructed) ) // »
     Paws__register_Paws();
   
-  MAKE_EXTERNAL(constructed) = true;
-}
+  MAKE_EXTERNAL(constructed) = true; }
 
 bool MAKE_EXTERNAL(constructed) = false;
 
