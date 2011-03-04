@@ -33,8 +33,8 @@
 #   define IF_EXTERNALIZED(CODE) // fizzle
 #   define IF_INTERNALIZED(CODE) CODE
 # else
-#   define e(NAME) INTERNIFY(NAME)
-#   define E(NAME) INTERNIFY(NAME)
+#   define e(NAME) MAKE_INTERNAL(NAME)
+#   define E(NAME) MAKE_INTERNAL(NAME)
 
 #   define IF_EXTERNALIZED(CODE) CODE
 #   define IF_INTERNALIZED(CODE) // fizzle
