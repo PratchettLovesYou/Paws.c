@@ -141,7 +141,8 @@ bool    extern MAKE_EXTERNAL(constructed); // (see `void construct(void)` below.
 # undef  DECLARATIONS
 
 
-struct Paws *   Paws = NULL;
+                                 struct Paws * // »
+                                        Paws = NULL;
 void static Paws__register_Paws(void) { Paws = malloc(sizeof(struct Paws));
   
   struct Paws // »
