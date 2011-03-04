@@ -38,12 +38,12 @@ typedef   struct e(typeRepresentation)*   e(typeRepresentation);
 
 
 struct e(typeRepresentation) {
-e(pointer)                    family;
-  char                        name[64]; };
+e(pointer)                      family;
+  char                          name[64]; };
 
 struct e(thing) {
-e(pointer) const              pointer;
-e(typeRepresentation) const   isa; };
+  e(pointer) const              pointer;
+  e(typeRepresentation) const   isa; };
 
 
 # endif //!defined(TYPE_DECLARATIONS)
