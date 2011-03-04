@@ -143,7 +143,7 @@ bool    extern MAKE_EXTERNAL(constructed); // (see `void construct(void)` below.
 
                                  struct Paws * // »
                                         Paws = NULL;
-void static Paws__register_Paws(void) { Paws = malloc(sizeof(struct Paws));
+void static Paws__register_Paws(void) { Paws = malloc(sizeof( struct Paws ));
   
   struct Paws // »
   auto data = {
@@ -156,7 +156,7 @@ void static Paws__register_Paws(void) { Paws = malloc(sizeof(struct Paws));
     .Number       = NULL,
     .Label        = NULL };
   
-  memcpy(Paws, &data, sizeof(struct Paws));
+  memcpy(Paws, &data, sizeof( struct Paws ));
   
 //Paws__register_Threading();
 //Paws__register_Unit();
