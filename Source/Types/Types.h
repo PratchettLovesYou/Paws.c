@@ -34,7 +34,7 @@ typedef   struct e(execution)*            e(execution);
 typedef   struct e(thing)                 e(thing);
 
           struct e(typeRepresentation);
-typedef   struct e(typeRepresentation)    e(typeRepresentation);
+typedef   struct e(typeRepresentation)*   e(typeRepresentation);
 
 
 struct e(typeRepresentation) {
