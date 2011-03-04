@@ -122,7 +122,7 @@ struct Paws {
   /// Core nuclear extensions’ families
   struct E(Number)       *Number;
   struct E(Label)        *Label;
-}* extern Paws;
+} extern *Paws;
 
 
 void    extern e(construct)    (void);
