@@ -157,14 +157,14 @@ void static Paws__register_Paws(void) { Paws = malloc(sizeof(struct Paws));
   
   memcpy(Paws, &data, sizeof(struct Paws));
   
-  // Paws__register_Threading();
-  // Paws__register_Unit();
-  
-  // Paws__register_Fork();
-  // Paws__register_Execution();
-  
-  // Paws__register_Number();
-  // Paws__register_Label();
+//Paws__register_Threading();
+//Paws__register_Unit();
+
+//Paws__register_Fork();
+//Paws__register_Execution();
+
+//Paws__register_Number();
+//Paws__register_Label();
 }
 
 
