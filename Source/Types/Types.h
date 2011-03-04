@@ -1,7 +1,3 @@
-# if !defined(TYPE_DECLARATIONS)
-#   define    TYPE_DECLARATIONS
-
-# include "Core.h"
 /*  This file forward-declares the two fundamental nuketypes absolutely essential to the operation of Paws’
  *  Nucleus: `struct fork` and `struct execution`. Other nuketypes are encapsulated in nuclear extensions (see
  *  the contents of the `Source/Nuclear Extensions/` directory), some of which are shipped with the `Paws.c`
@@ -21,6 +17,10 @@
  *  This file is already included everywhere it is relevant. It is very unlikely that you, as an API consumer,
  *  will have a reason to electively include this file yourself.
  */
+# if !defined(TYPE_DECLARATIONS)
+#   define    TYPE_DECLARATIONS
+
+# include "Core.h"
 
 
           struct e(list);

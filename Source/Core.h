@@ -1,10 +1,10 @@
-# if !defined(CORE_DECLARATIONS)
-#   define    CORE_DECLARATIONS
 /*  This file is included to nearly every other header in the Paws codebase; it provides macros and definitions
  *  necessary throughout the codebase.
  *  
  *  You should never have a reason to include or use this file; it’s included everywhere it is necessary.
  */
+# if !defined(CORE_DECLARATIONS)
+#   define    CORE_DECLARATIONS
 
 
 /*  This macro is defined in one of two ways: if one or more Paws headers are included manually, or if

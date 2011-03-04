@@ -1,5 +1,3 @@
-# if !defined(PAWS_DECLARATIONS)
-#   define    PAWS_DECLARATIONS
 /*  Welcome to the `Paws.c` API. This is the first file you have to `#include` to interface with the Paws API.
  *  For example:
  *      
@@ -81,6 +79,8 @@
  *  and datatypes utilized throughout the codebase that aren’t themselves nuketypes; these can be found in
  *  `Ancillary/`.
  */
+# if !defined(PAWS_DECLARATIONS)
+#   define    PAWS_DECLARATIONS
 
 
 # if defined(DECLARATIONS) && !defined(INTERNALIZE)
