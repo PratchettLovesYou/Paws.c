@@ -29,6 +29,6 @@ small, with file watchers, SHA1 comparison, git integration, and in-file depende
 Until then…
     
     zsh;
-    C99() { eval local last="\$$#"; last=${last##*/}; clang -std=c99 -pedantic-errors -Wall -O0 -o "${last%.*}.o" "$@" }
+    C99() { eval local last="\$$#"; last=${last##*/}; $CC -std=c99 -pedantic-errors -Wall -O0 -o "${last%.*}.o" "$@" }
     
 (-;
