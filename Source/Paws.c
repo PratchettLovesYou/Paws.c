@@ -125,9 +125,9 @@ struct Paws {
 } extern *Paws;
 
 
-void    extern e(construct)    (void);
+extern    void    e(construct)   (void);
 
-bool    extern MAKE_EXTERNAL(constructed); // (see `void construct(void)` below.)
+extern    bool    MAKE_EXTERNAL(constructed); // (see `void construct(void)` below.)
 
 
 
@@ -141,9 +141,11 @@ bool    extern MAKE_EXTERNAL(constructed); // (see `void construct(void)` below.
 # undef  DECLARATIONS
 
 
-                                 struct Paws * // »
-                                        Paws = NULL;
-void static Paws__register_Paws(void) { Paws = malloc(sizeof( struct Paws ));
+static    void    Paws__register_Paws    (void);
+
+                          struct Paws * // »
+                                 Paws = NULL;
+void Paws__register_Paws(void) { Paws = malloc(sizeof( struct Paws ));
   
   struct Paws // »
   auto data = {
@@ -174,7 +176,7 @@ void static Paws__register_Paws(void) { Paws = malloc(sizeof( struct Paws ));
  *  cross-platform compilation, it’s advisable to call `construct()` anyway, as it’s a noop if the environment
  *  has already been constructed.
  */
-void extern __constructor e(construct)(void) {
+void __constructor e(construct)(void) {
   if ( !MAKE_EXTERNAL(constructed) ) // »
     Paws__register_Paws();
   

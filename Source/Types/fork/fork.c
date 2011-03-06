@@ -34,7 +34,7 @@ e(fork)     (*naughtify)    ( e(fork) this );
 e(thing)    (*at)           ( e(fork) this,                 e(ll_size) idx );
 } IF_INTERNALIZED(extern *Fork);
 
-void    extern MAKE_EXTERNAL(register_Fork)    (void);
+extern    void    MAKE_EXTERNAL(register_Fork)   (void);
 
 
 
@@ -51,14 +51,14 @@ void    extern MAKE_EXTERNAL(register_Fork)    (void);
 # undef  DECLARATIONS
 
 
-fork    static Fork__allocate          (void);
+static    fork    Fork__allocate     (void);
 
-fork    static fork__naughtify         (fork this);
-thing   static fork__thing             (fork this);
-void    static fork__insert            (fork this, thing child, ll_size idx);
-void    static fork__prefix            (fork this, thing child);
-void    static fork__affix             (fork this, thing child);
-thing   static fork__at                (fork this,              ll_size idx);
+static    fork    fork__naughtify    (fork this);
+static    thing   fork__thing        (fork this);
+static    void    fork__insert       (fork this, thing child, ll_size idx);
+static    void    fork__prefix       (fork this, thing child);
+static    void    fork__affix        (fork this, thing child);
+static    thing   fork__at           (fork this,              ll_size idx);
 
 
   IF_EXTERNALIZED(static) struct Fork * // »
@@ -71,16 +71,16 @@ void Paws__register_Fork(void) { Fork         = malloc(sizeof( struct Fork ));
   
   struct Fork // »
   auto data = {
-    .Fork             = malloc(sizeof( struct typeRepresentation )),
+    .Fork         = malloc(sizeof( struct typeRepresentation )),
     
-    .allocate         = Fork__allocate,
+    .allocate     = Fork__allocate,
     
-    .naughtify        = fork__naughtify,
-    .thing            = fork__thing,
-    .insert           = fork__insert,
-    .prefix           = fork__prefix,
-    .affix            = fork__affix,
-    .at               = fork__at };
+    .naughtify    = fork__naughtify,
+    .thing        = fork__thing,
+    .insert       = fork__insert,
+    .prefix       = fork__prefix,
+    .affix        = fork__affix,
+    .at           = fork__at };
   
   memcpy(data.Fork, &type, sizeof( struct typeRepresentation ));
   memcpy(Fork,      &data, sizeof( struct Fork ));

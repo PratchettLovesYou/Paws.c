@@ -72,8 +72,8 @@ e(ll)         (*allocate)            (void);
 e(element)    (*at)                 ( e(ll) this,                   e(ll_size) idx );
 } IF_INTERNALIZED(extern *LL);
 
-void    extern MAKE_EXTERNAL(register_Element)   (void);
-void    extern MAKE_EXTERNAL(register_LL)        (void);
+extern    void    MAKE_EXTERNAL(register_Element)    (void);
+extern    void    MAKE_EXTERNAL(register_LL)         (void);
 
 
 
@@ -87,10 +87,10 @@ void    extern MAKE_EXTERNAL(register_LL)        (void);
 # undef  DECLARATIONS
 
 
-element   static Element__allocate   (thing thing);
+static    element   Element__allocate    (thing thing);
 
-void      static element__prefix     (element this, element other);
-void      static element__affix      (element this, element other);
+static    void      element__prefix      (element this, element other);
+static    void      element__affix       (element this, element other);
 
      IF_EXTERNALIZED(static) struct Element * // »
                                     Element   = NULL;
@@ -107,13 +107,13 @@ void Paws__register_Element(void) { Element   = malloc(sizeof( struct Element ))
   memcpy(Element, &data, sizeof( struct Element )); }
 
 
-ll        static LL__allocate            (void);
+ll        static    LL__allocate           (void);
 
-void      static ll__anterior_insert     (ll this, element child, ll_size idx);
-void      static ll__posterior_insert    (ll this, element child, ll_size idx);
-void      static ll__prefix              (ll this, element child);
-void      static ll__affix               (ll this, element child);
-element   static ll__at                  (ll this,                ll_size idx);
+static    void      ll__anterior_insert    (ll this, element child, ll_size idx);
+static    void      ll__posterior_insert   (ll this, element child, ll_size idx);
+static    void      ll__prefix             (ll this, element child);
+static    void      ll__affix              (ll this, element child);
+static    element   ll__at                 (ll this,                ll_size idx);
 
 IF_EXTERNALIZED(static) struct LL * // »
                                LL   = NULL;
