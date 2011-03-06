@@ -30,14 +30,14 @@
 #   define e(NAME) MAKE_EXTERNAL(NAME)
 #   define E(NAME) MAKE_EXTERNAL(NAME)
 
-#   define IF_EXTERNALIZED(CODE) // fizzle
-#   define IF_INTERNALIZED(CODE) CODE
+#   define IF_EXTERNALIZED(CODE) CODE
+#   define IF_INTERNALIZED(CODE) // fizzle
 # else
 #   define e(NAME) MAKE_INTERNAL(NAME)
 #   define E(NAME) MAKE_INTERNAL(NAME)
 
-#   define IF_EXTERNALIZED(CODE) CODE
-#   define IF_INTERNALIZED(CODE) // fizzle
+#   define IF_EXTERNALIZED(CODE) // fizzle
+#   define IF_INTERNALIZED(CODE) CODE
 # endif //defined(EXTERNALIZE)
 
 
