@@ -42,7 +42,7 @@
 
 
 /* Yes, I’m a pedant. Get over it. */
-typedef void*   e(pointer);
+typedef   void *    e(pointer);
 
 
 # if !defined(__has_attribute)
