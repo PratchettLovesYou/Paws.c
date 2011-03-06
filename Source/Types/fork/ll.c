@@ -96,8 +96,8 @@ static    void      element__affix       (element this, element other);
                                     Element   = NULL;
 void Paws__register_Element(void) { Element   = malloc(sizeof( struct Element ));
   
-  struct Element // »
-  auto data = {
+  auto struct Element // »
+  data = {
     .allocate   = Element__allocate,
     
     .prefix     = element__prefix,
@@ -119,8 +119,8 @@ IF_EXTERNALIZED(static) struct LL * // »
                                LL   = NULL;
 void Paws__register_LL(void) { LL   = malloc(sizeof( struct LL ));
   
-  struct LL // »
-  auto data = {
+  auto struct LL // »
+  data = {
     .allocate           = LL__allocate,
     
     .anterior_insert    = ll__anterior_insert,
@@ -138,8 +138,8 @@ void Paws__register_LL(void) { LL   = malloc(sizeof( struct LL ));
  * 
  * Expects a `thing` as an argument, to be stored on this `element` as `e`.
  */
-element Element__allocate(thing target) { element // »
-  auto this = malloc(sizeof( struct element ));
+element Element__allocate(thing target) { auto element // »
+  this = malloc(sizeof( struct element ));
   this->next     = NULL;
   this->previous = NULL;
   memcpy(&this->thing, &target, sizeof( struct thing ));
@@ -191,8 +191,8 @@ void element__affix(element this, element other) {
 
 /* This method initializes a new `ll`, with no elements. The `first` and `last` are set to `NULL` pointers, and
  * `length` is initialized to zero. */
-ll LL__allocate(void) { ll // »
-  auto this = malloc(sizeof( struct ll ));
+ll LL__allocate(void) { auto ll // »
+  this = malloc(sizeof( struct ll ));
   this->first  = NULL;
   this->last   = NULL;
   this->length = 0;

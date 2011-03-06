@@ -8,13 +8,13 @@
 
 # define SOMETHING _make_something()//;
 
-thing static _make_something(void) { struct thing // »
-  auto something = { .pointer = NULL, .isa = NULL };
+thing static _make_something(void) { auto struct thing // »
+  something = { .pointer = NULL, .isa = NULL };
   
   return something; }
 
-CEST(LL, allocate) { ll // »
-  auto a_ll = LL->allocate();
+CEST(LL, allocate) { auto ll // »
+  a_ll = LL->allocate();
   
   ASSERT( a_ll->first  == NULL );
   ASSERT( a_ll->last   == NULL );
@@ -22,7 +22,7 @@ CEST(LL, allocate) { ll // »
   
   SUCCEED; }
 
-CEST(ll, anterior_insert) { ll auto a_ll; element auto element1, element2, element3, elementA;
+CEST(ll, anterior_insert) { auto ll a_ll; auto element element1, element2, element3, elementA;
   a_ll = LL->allocate();
   element1 = Element->allocate(SOMETHING); LL->affix(a_ll, element1);
   element2 = Element->allocate(SOMETHING); LL->affix(a_ll, element2);
@@ -40,7 +40,7 @@ CEST(ll, anterior_insert) { ll auto a_ll; element auto element1, element2, eleme
   
   SUCCEED; }
 
-CEST(ll, posterior_insert) { ll auto a_ll; element auto element1, element2, element3, elementA;
+CEST(ll, posterior_insert) { auto ll a_ll; auto element element1, element2, element3, elementA;
   a_ll = LL->allocate();
   element1 = Element->allocate(SOMETHING); LL->affix(a_ll, element1);
   element2 = Element->allocate(SOMETHING); LL->affix(a_ll, element2);
@@ -58,7 +58,7 @@ CEST(ll, posterior_insert) { ll auto a_ll; element auto element1, element2, elem
   
   SUCCEED; }
 
-CEST(ll, prefix) { ll auto a_ll; element auto element1, element2, element3;
+CEST(ll, prefix) { auto ll a_ll; auto element element1, element2, element3;
   a_ll = LL->allocate();
   element1 = Element->allocate(SOMETHING);
   element2 = Element->allocate(SOMETHING);
@@ -81,7 +81,7 @@ CEST(ll, prefix) { ll auto a_ll; element auto element1, element2, element3;
   
   SUCCEED; }
 
-CEST(ll, affix) { ll auto a_ll; element auto element1, element2, element3;
+CEST(ll, affix) { auto ll a_ll; auto element element1, element2, element3;
   a_ll = LL->allocate();
   element1 = Element->allocate(SOMETHING);
   element2 = Element->allocate(SOMETHING);
@@ -104,7 +104,7 @@ CEST(ll, affix) { ll auto a_ll; element auto element1, element2, element3;
   
   SUCCEED; }
 
-CEST(ll, at) { ll auto a_ll; element auto element1, element2, element3;
+CEST(ll, at) { auto ll a_ll; auto element element1, element2, element3;
   a_ll = LL->allocate();
   
   /* Empty `ll`s */
@@ -128,14 +128,14 @@ CEST(ll, at) { ll auto a_ll; element auto element1, element2, element3;
   SUCCEED; }
 
 
-CEST(Element, allocate) { element auto // »
+CEST(Element, allocate) { auto element // »
   a_element = Element->allocate(SOMETHING);
   ASSERT( a_element->next     == NULL );
   ASSERT( a_element->previous == NULL );
   
   SUCCEED; }
 
-CEST(element, prefix) { element auto // »
+CEST(element, prefix) { auto element // »
   element1 = Element->allocate(SOMETHING),
   element2 = Element->allocate(SOMETHING),
   element3 = Element->allocate(SOMETHING),
@@ -195,7 +195,7 @@ CEST(element, prefix) { element auto // »
   
   SUCCEED; }
 
-CEST(element, affix) { element auto // »
+CEST(element, affix) { auto element // »
   element1 = Element->allocate(SOMETHING),
   element2 = Element->allocate(SOMETHING),
   element3 = Element->allocate(SOMETHING),

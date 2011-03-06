@@ -147,8 +147,8 @@ static    void    Paws__register_Paws    (void);
                                  Paws = NULL;
 void Paws__register_Paws(void) { Paws = malloc(sizeof( struct Paws ));
   
-  struct Paws // »
-  auto data = {
+  auto struct Paws // »
+  data = {
     .Threading    = NULL,
     .Unit         = NULL,
     

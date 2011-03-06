@@ -66,11 +66,11 @@ static    thing   fork__at           (fork this,              ll_size idx);
 void Paws__register_Fork(void) { Fork         = malloc(sizeof( struct Fork ));
                            Paws->Fork         = Fork;
   
-  struct typeRepresentation // »
-  auto type = { .family = Fork, .name = "fork" };
+  auto struct typeRepresentation // »
+  type = { .family = Fork, .name = "fork" };
   
-  struct Fork // »
-  auto data = {
+  auto struct Fork // »
+  data = {
     .Fork         = malloc(sizeof( struct typeRepresentation )),
     
     .allocate     = Fork__allocate,
@@ -89,22 +89,22 @@ void Paws__register_Fork(void) { Fork         = malloc(sizeof( struct Fork ));
   Paws__register_LL(); }
 
 
-fork Fork__allocate(void) { fork // »
-  auto this = malloc(sizeof( struct fork ));
+fork Fork__allocate(void) { auto fork // »
+  this = malloc(sizeof( struct fork ));
   this->content = LL->allocate();
   
   return this; }
 
-fork fork__naughtify(fork this) { fork // »
-  auto naughty = Fork->allocate();
+fork fork__naughtify(fork this) { auto fork // »
+  naughty = Fork->allocate();
   
   Fork->insert(naughty, Fork->thing(naughty), 0);
   Fork->insert(   this, Fork->thing(naughty), 0);
   
   return naughty; }
 
-thing fork__thing(fork this) { struct thing // »
-  auto something = { .pointer = this, .isa = Fork->Fork };
+thing fork__thing(fork this) { auto struct thing // »
+  something = { .pointer = this, .isa = Fork->Fork };
   
   return something; }
 
@@ -120,8 +120,8 @@ void fork__prefix(fork this, thing child) {
 void fork__affix(fork this, thing child)  {
   LL->affix (this->content, Element->allocate(child)); }
 
-thing fork__at(fork this, ll_size idx) { element // »
-  auto e = LL->at(this->content, idx);
+thing fork__at(fork this, ll_size idx) { auto element // »
+  e = LL->at(this->content, idx);
   
   if (e == NULL) return (thing){ {NULL} };
             else return e->thing; }

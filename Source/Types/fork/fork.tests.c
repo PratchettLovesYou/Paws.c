@@ -5,7 +5,7 @@
 # undef  DECLARATIONS
 
 
-CEST(Fork, allocate) { fork auto // »
+CEST(Fork, allocate) { auto fork // »
   a_fork = Fork->allocate();
   
   ASSERT( a_fork->content->first  == NULL );
@@ -14,7 +14,7 @@ CEST(Fork, allocate) { fork auto // »
   
   SUCCEED; }
 
-CEST(fork, naughtify) { fork auto rv, a_naughty, // »
+CEST(fork, naughtify) { auto fork rv, a_naughty, // »
   a_fork = Fork->allocate();
   
   rv = Fork->naughtify(a_fork);
@@ -29,7 +29,7 @@ CEST(fork, naughtify) { fork auto rv, a_naughty, // »
   
   SUCCEED; }
 
-CEST(fork, thing) { fork auto // »
+CEST(fork, thing) { auto fork // »
   a_fork = Fork->allocate();
   
   ASSERT( Fork->thing(a_fork).pointer == a_fork );
@@ -37,7 +37,7 @@ CEST(fork, thing) { fork auto // »
   
   SUCCEED; }
 
-CEST(fork, insert) { fork auto // »
+CEST(fork, insert) { auto fork // »
   a_fork = Fork->allocate();
   thing thing1 = Fork->thing(Fork->allocate()),
         thing2 = Fork->thing(Fork->allocate()),
