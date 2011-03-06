@@ -13,21 +13,30 @@ thing static _make_something(void) { auto struct thing // »
   
   return something; }
 
-CEST(LL, allocate) { auto ll // »
-  a_ll = LL->allocate();
+CEST(LL, allocate) { auto struct ll * // »
+  a_ll_pointer = LL->allocate();
   
-  ASSERT( a_ll->first  == NULL );
-  ASSERT( a_ll->last   == NULL );
-  ASSERT( a_ll->length == 0    );
+  // This is an absolutely paltry test, but I don’t know what else I can do here. /=
+  ASSERT( a_ll_pointer != NULL );
+  
+  SUCCEED; }
+
+CEST(LL, initialize) { auto struct ll * // »
+  a_ll_pointer = LL->allocate();
+  
+  LL->initialize(a_ll_pointer);
+  ASSERT( (*a_ll_pointer).first  == NULL );
+  ASSERT( (*a_ll_pointer).last   == NULL );
+  ASSERT( (*a_ll_pointer).length == 0    );
   
   SUCCEED; }
 
 CEST(ll, anterior_insert) { auto ll a_ll; auto element element1, element2, element3, elementA;
-  a_ll = LL->allocate();
-  element1 = Element->allocate(SOMETHING); LL->affix(a_ll, element1);
-  element2 = Element->allocate(SOMETHING); LL->affix(a_ll, element2);
-  element3 = Element->allocate(SOMETHING); LL->affix(a_ll, element3);
-  elementA = Element->allocate(SOMETHING);
+  a_ll = LL->create();
+  element1 = Element->create(SOMETHING); LL->affix(a_ll, element1);
+  element2 = Element->create(SOMETHING); LL->affix(a_ll, element2);
+  element3 = Element->create(SOMETHING); LL->affix(a_ll, element3);
+  elementA = Element->create(SOMETHING);
   
   /* TODO: Error condition */
   LL->anterior_insert(a_ll, elementA, 0);
@@ -41,11 +50,11 @@ CEST(ll, anterior_insert) { auto ll a_ll; auto element element1, element2, eleme
   SUCCEED; }
 
 CEST(ll, posterior_insert) { auto ll a_ll; auto element element1, element2, element3, elementA;
-  a_ll = LL->allocate();
-  element1 = Element->allocate(SOMETHING); LL->affix(a_ll, element1);
-  element2 = Element->allocate(SOMETHING); LL->affix(a_ll, element2);
-  element3 = Element->allocate(SOMETHING); LL->affix(a_ll, element3);
-  elementA = Element->allocate(SOMETHING);
+  a_ll = LL->create();
+  element1 = Element->create(SOMETHING); LL->affix(a_ll, element1);
+  element2 = Element->create(SOMETHING); LL->affix(a_ll, element2);
+  element3 = Element->create(SOMETHING); LL->affix(a_ll, element3);
+  elementA = Element->create(SOMETHING);
   
   /* TODO: Error condition */
   LL->posterior_insert(a_ll, elementA, a_ll->length);
@@ -59,10 +68,10 @@ CEST(ll, posterior_insert) { auto ll a_ll; auto element element1, element2, elem
   SUCCEED; }
 
 CEST(ll, prefix) { auto ll a_ll; auto element element1, element2, element3;
-  a_ll = LL->allocate();
-  element1 = Element->allocate(SOMETHING);
-  element2 = Element->allocate(SOMETHING);
-  element3 = Element->allocate(SOMETHING);
+  a_ll = LL->create();
+  element1 = Element->create(SOMETHING);
+  element2 = Element->create(SOMETHING);
+  element3 = Element->create(SOMETHING);
   
   LL->prefix(a_ll, element3);
   ASSERT( a_ll->length == 1        );
@@ -82,10 +91,10 @@ CEST(ll, prefix) { auto ll a_ll; auto element element1, element2, element3;
   SUCCEED; }
 
 CEST(ll, affix) { auto ll a_ll; auto element element1, element2, element3;
-  a_ll = LL->allocate();
-  element1 = Element->allocate(SOMETHING);
-  element2 = Element->allocate(SOMETHING);
-  element3 = Element->allocate(SOMETHING);
+  a_ll = LL->create();
+  element1 = Element->create(SOMETHING);
+  element2 = Element->create(SOMETHING);
+  element3 = Element->create(SOMETHING);
   
   LL->affix(a_ll, element1);
   ASSERT( a_ll->length == 1        );
@@ -105,16 +114,16 @@ CEST(ll, affix) { auto ll a_ll; auto element element1, element2, element3;
   SUCCEED; }
 
 CEST(ll, at) { auto ll a_ll; auto element element1, element2, element3;
-  a_ll = LL->allocate();
+  a_ll = LL->create();
   
   /* Empty `ll`s */
   ASSERT( LL->at(a_ll,  5) == NULL );
   ASSERT( LL->at(a_ll,  1) == NULL );
   ASSERT( LL->at(a_ll,  0) == NULL );
   
-  element1 = Element->allocate(SOMETHING); LL->affix(a_ll, element1);
-  element2 = Element->allocate(SOMETHING); LL->affix(a_ll, element2);
-  element3 = Element->allocate(SOMETHING); LL->affix(a_ll, element3);
+  element1 = Element->create(SOMETHING); LL->affix(a_ll, element1);
+  element2 = Element->create(SOMETHING); LL->affix(a_ll, element2);
+  element3 = Element->create(SOMETHING); LL->affix(a_ll, element3);
   
   /* Positive indicies */
   ASSERT( LL->at(a_ll,  0) == element1 );
@@ -128,20 +137,30 @@ CEST(ll, at) { auto ll a_ll; auto element element1, element2, element3;
   SUCCEED; }
 
 
-CEST(Element, allocate) { auto element // »
-  a_element = Element->allocate(SOMETHING);
-  ASSERT( a_element->next     == NULL );
-  ASSERT( a_element->previous == NULL );
+CEST(Element, allocate) { auto struct element * // »
+  an_element_pointer = Element->allocate();
+  
+  // This is an absolutely paltry test, but I don’t know what else I can do here. /=
+  ASSERT( an_element_pointer != NULL );
+  
+  SUCCEED; }
+
+CEST(Element, initialize) { auto struct element * // »
+  an_element_pointer = Element->allocate();
+  
+  Element->initialize(an_element_pointer, SOMETHING);
+  ASSERT( (*an_element_pointer).next     == NULL );
+  ASSERT( (*an_element_pointer).previous == NULL );
   
   SUCCEED; }
 
 CEST(element, prefix) { auto element // »
-  element1 = Element->allocate(SOMETHING),
-  element2 = Element->allocate(SOMETHING),
-  element3 = Element->allocate(SOMETHING),
-  elementA = Element->allocate(SOMETHING),
-  elementB = Element->allocate(SOMETHING),
-  elementC = Element->allocate(SOMETHING);
+  element1 = Element->create(SOMETHING),
+  element2 = Element->create(SOMETHING),
+  element3 = Element->create(SOMETHING),
+  elementA = Element->create(SOMETHING),
+  elementB = Element->create(SOMETHING),
+  elementC = Element->create(SOMETHING);
   
   
   /* A basic single prefix */
@@ -196,12 +215,12 @@ CEST(element, prefix) { auto element // »
   SUCCEED; }
 
 CEST(element, affix) { auto element // »
-  element1 = Element->allocate(SOMETHING),
-  element2 = Element->allocate(SOMETHING),
-  element3 = Element->allocate(SOMETHING),
-  elementA = Element->allocate(SOMETHING),
-  elementB = Element->allocate(SOMETHING),
-  elementC = Element->allocate(SOMETHING);
+  element1 = Element->create(SOMETHING),
+  element2 = Element->create(SOMETHING),
+  element3 = Element->create(SOMETHING),
+  elementA = Element->create(SOMETHING),
+  elementB = Element->create(SOMETHING),
+  elementC = Element->create(SOMETHING);
   
   
   /* A basic single affix */

@@ -52,24 +52,28 @@ struct e(ll) {
 struct E(Element) {
   // Functions ==============
   /// `Element` family functions
-e(element)    (*allocate)   ( e(thing) thing );
+e(element)              (*create)       ( e(thing) thing );
+  struct e(element) *   (*allocate)      (void);
   
   /// `struct element` instance functions
-  void        (*prefix)     ( e(element) this, e(element) other );
-  void        (*affix)      ( e(element) this, e(element) other );
+e(element)              (*initialize)   ( struct e(element)* this, e(thing) thing );
+  void                  (*prefix)       ( e(element) this, e(element) other );
+  void                  (*affix)        ( e(element) this, e(element) other );
 } IF_INTERNALIZED(extern *Element);
 
 struct E(LL) {
   // Functions ==============
   /// `LL` family functions
-e(ll)         (*allocate)            (void);
+e(ll)               (*create)              (void);
+  struct e(ll) *    (*allocate)            (void);
   
   /// `struct ll` instance functions
-  void        (*anterior_insert)    ( e(ll) this, e(element) child, e(ll_size) idx );
-  void        (*posterior_insert)   ( e(ll) this, e(element) child, e(ll_size) idx );
-  void        (*prefix)             ( e(ll) this, e(element) child );
-  void        (*affix)              ( e(ll) this, e(element) child );
-e(element)    (*at)                 ( e(ll) this,                   e(ll_size) idx );
+e(ll)               (*initialize)         ( struct e(ll)* this );
+  void              (*anterior_insert)    ( e(ll) this, e(element) child, e(ll_size) idx );
+  void              (*posterior_insert)   ( e(ll) this, e(element) child, e(ll_size) idx );
+  void              (*prefix)             ( e(ll) this, e(element) child );
+  void              (*affix)              ( e(ll) this, e(element) child );
+e(element)          (*at)                 ( e(ll) this,                   e(ll_size) idx );
 } IF_INTERNALIZED(extern *LL);
 
 extern    void    MAKE_EXTERNAL(register_Element)    (void);
@@ -87,10 +91,13 @@ extern    void    MAKE_EXTERNAL(register_LL)         (void);
 # undef  DECLARATIONS
 
 
-static    element   Element__allocate    (thing thing);
+static    element             Element__create        (thing thing);
+static    struct element *    Element__allocate      (void);
 
-static    void      element__prefix      (element this, element other);
-static    void      element__affix       (element this, element other);
+static    element             element__initialize    (struct element* this, thing thing);
+static    void                element__prefix        (element this,         element other);
+static    void                element__affix         (element this,         element other);
+
 
      IF_EXTERNALIZED(static) struct Element * // »
                                     Element   = NULL;
@@ -98,22 +105,26 @@ void Paws__register_Element(void) { Element   = malloc(sizeof( struct Element ))
   
   auto struct Element // »
   data = {
-    .allocate   = Element__allocate,
+    .create       = Element__create,
+    .allocate     = Element__allocate,
     
-    .prefix     = element__prefix,
-    .affix      = element__affix
+    .initialize   = element__initialize,
+    .prefix       = element__prefix,
+    .affix        = element__affix
   };
   
   memcpy(Element, &data, sizeof( struct Element )); }
 
 
-ll        static    LL__allocate           (void);
+static    ll            LL__create             (void);
+static    struct ll *   LL__allocate           (void);
 
-static    void      ll__anterior_insert    (ll this, element child, ll_size idx);
-static    void      ll__posterior_insert   (ll this, element child, ll_size idx);
-static    void      ll__prefix             (ll this, element child);
-static    void      ll__affix              (ll this, element child);
-static    element   ll__at                 (ll this,                ll_size idx);
+static    ll            ll__initialize         (struct ll* this);
+static    void          ll__anterior_insert    (ll this, element child, ll_size idx);
+static    void          ll__posterior_insert   (ll this, element child, ll_size idx);
+static    void          ll__prefix             (ll this, element child);
+static    void          ll__affix              (ll this, element child);
+static    element       ll__at                 (ll this,                ll_size idx);
 
 IF_EXTERNALIZED(static) struct LL * // »
                                LL   = NULL;
@@ -121,8 +132,10 @@ void Paws__register_LL(void) { LL   = malloc(sizeof( struct LL ));
   
   auto struct LL // »
   data = {
+    .create             = LL__create,
     .allocate           = LL__allocate,
     
+    .initialize         = ll__initialize,
     .anterior_insert    = ll__anterior_insert,
     .posterior_insert   = ll__posterior_insert,
     .prefix             = ll__prefix,
@@ -138,8 +151,13 @@ void Paws__register_LL(void) { LL   = malloc(sizeof( struct LL ));
  * 
  * Expects a `thing` as an argument, to be stored on this `element` as `e`.
  */
-element Element__allocate(thing target) { auto element // »
-  this = malloc(sizeof( struct element ));
+element Element__create(thing target) {
+  return Element->initialize(Element->allocate(), target); }
+
+struct element* Element__allocate(void) {
+  return malloc(sizeof( struct element )); }
+
+element element__initialize(struct element* this, thing target) {
   this->next     = NULL;
   this->previous = NULL;
   memcpy(&this->thing, &target, sizeof( struct thing ));
@@ -191,8 +209,13 @@ void element__affix(element this, element other) {
 
 /* This method initializes a new `ll`, with no elements. The `first` and `last` are set to `NULL` pointers, and
  * `length` is initialized to zero. */
-ll LL__allocate(void) { auto ll // »
-  this = malloc(sizeof( struct ll ));
+ll LL__create(void) {
+  return LL->initialize(LL->allocate()); }
+
+struct ll* LL__allocate(void) {
+  return malloc(sizeof( struct ll )); }
+
+ll ll__initialize(struct ll* this) {
   this->first  = NULL;
   this->last   = NULL;
   this->length = 0;

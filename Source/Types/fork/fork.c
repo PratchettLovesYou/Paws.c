@@ -23,15 +23,17 @@ struct E(Fork) {
   
   // Functions ==============
   /// `Fork` family functions
-e(fork)     (*allocate)      (void);
+e(fork)             (*create)        (void);
+struct e(fork) *    (*allocate)      (void);
   
   /// `struct fork` instance functions
-e(thing)    (*thing)        ( e(fork) this );
-e(fork)     (*naughtify)    ( e(fork) this );
-  void      (*insert)       ( e(fork) this, e(thing) child, e(ll_size) idx );
-  void      (*prefix)       ( e(fork) this, e(thing) child );
-  void      (*affix)        ( e(fork) this, e(thing) child );
-e(thing)    (*at)           ( e(fork) this,                 e(ll_size) idx );
+e(fork)             (*initialize)   ( struct e(fork)* this );
+e(thing)            (*thing)        ( e(fork) this );
+e(fork)             (*naughtify)    ( e(fork) this );
+  void              (*insert)       ( e(fork) this, e(thing) child, e(ll_size) idx );
+  void              (*prefix)       ( e(fork) this, e(thing) child );
+  void              (*affix)        ( e(fork) this, e(thing) child );
+e(thing)            (*at)           ( e(fork) this,                 e(ll_size) idx );
 } IF_INTERNALIZED(extern *Fork);
 
 extern    void    MAKE_EXTERNAL(register_Fork)   (void);
@@ -51,14 +53,16 @@ extern    void    MAKE_EXTERNAL(register_Fork)   (void);
 # undef  DECLARATIONS
 
 
-static    fork    Fork__allocate     (void);
+static    fork            Fork__create       (void);
+static    struct fork *   Fork__allocate     (void);
 
-static    fork    fork__naughtify    (fork this);
-static    thing   fork__thing        (fork this);
-static    void    fork__insert       (fork this, thing child, ll_size idx);
-static    void    fork__prefix       (fork this, thing child);
-static    void    fork__affix        (fork this, thing child);
-static    thing   fork__at           (fork this,              ll_size idx);
+static    fork            fork__initialize   (fork this);
+static    fork            fork__naughtify    (fork this);
+static    thing           fork__thing        (fork this);
+static    void            fork__insert       (fork this, thing child, ll_size idx);
+static    void            fork__prefix       (fork this, thing child);
+static    void            fork__affix        (fork this, thing child);
+static    thing           fork__at           (fork this,              ll_size idx);
 
 
   IF_EXTERNALIZED(static) struct Fork * // »
@@ -73,8 +77,10 @@ void Paws__register_Fork(void) { Fork         = malloc(sizeof( struct Fork ));
   data = {
     .Fork         = malloc(sizeof( struct typeRepresentation )),
     
+    .create       = Fork__create,
     .allocate     = Fork__allocate,
     
+    .initialize   = fork__initialize,
     .naughtify    = fork__naughtify,
     .thing        = fork__thing,
     .insert       = fork__insert,
@@ -89,14 +95,19 @@ void Paws__register_Fork(void) { Fork         = malloc(sizeof( struct Fork ));
   Paws__register_LL(); }
 
 
-fork Fork__allocate(void) { auto fork // »
-  this = malloc(sizeof( struct fork ));
-  this->content = LL->allocate();
+fork Fork__create(void) {
+  return Fork->initialize(Fork->allocate()); }
+
+struct fork * Fork__allocate(void) {
+  return malloc(sizeof( struct fork )); }
+
+fork fork__initialize(fork this) {
+  this->content = LL->create();
   
   return this; }
 
 fork fork__naughtify(fork this) { auto fork // »
-  naughty = Fork->allocate();
+  naughty = Fork->create();
   
   Fork->insert(naughty, Fork->thing(naughty), 0);
   Fork->insert(   this, Fork->thing(naughty), 0);
@@ -112,13 +123,13 @@ void fork__insert(fork this, thing child, ll_size idx) {
   if (idx == 0)                          Fork->prefix(this, child);
   else if (idx == this->content->length) Fork->affix (this, child);
   else
-    LL->posterior_insert(this->content, Element->allocate(child), idx); }
+    LL->posterior_insert(this->content, Element->create(child), idx); }
 
 void fork__prefix(fork this, thing child) {
-  LL->prefix(this->content, Element->allocate(child)); }
+  LL->prefix(this->content, Element->create(child)); }
 
 void fork__affix(fork this, thing child)  {
-  LL->affix (this->content, Element->allocate(child)); }
+  LL->affix (this->content, Element->create(child)); }
 
 thing fork__at(fork this, ll_size idx) { auto element // »
   e = LL->at(this->content, idx);

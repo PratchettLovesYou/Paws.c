@@ -42,7 +42,7 @@
  *      functions”.) This is always CamelCase, with the initial character uppercased:
  *          
  *          fork    my_fork;
- *          my_fork = Fork->allocate();
+ *          my_fork = Fork->create();
  *          
  *  We also provide a cruicial `thing` pointer type, which can refer to *any* Paws nuketype (even those defined
  *  in nuclear extensions.) More information about that is available in `Types/Types.h`.

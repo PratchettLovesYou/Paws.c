@@ -5,9 +5,18 @@
 # undef  DECLARATIONS
 
 
-CEST(Fork, allocate) { auto fork // »
+CEST(Fork, allocate) { auto struct fork * // »
+  a_fork_struct = Fork->allocate();
+  
+  // This is an absolutely paltry test, but I don’t know what else I can do here. /=
+  ASSERT( a_fork_struct != NULL );
+  
+  SUCCEED; }
+
+CEST(Fork, initialize) { auto fork // »
   a_fork = Fork->allocate();
   
+  Fork->initialize(a_fork);
   ASSERT( a_fork->content->first  == NULL );
   ASSERT( a_fork->content->last   == NULL );
   ASSERT( a_fork->content->length == 0    );
@@ -15,7 +24,7 @@ CEST(Fork, allocate) { auto fork // »
   SUCCEED; }
 
 CEST(fork, naughtify) { auto fork rv, a_naughty, // »
-  a_fork = Fork->allocate();
+  a_fork = Fork->create();
   
   rv = Fork->naughtify(a_fork);
   ASSERT(        a_fork->content->length        == 1          );
@@ -30,7 +39,7 @@ CEST(fork, naughtify) { auto fork rv, a_naughty, // »
   SUCCEED; }
 
 CEST(fork, thing) { auto fork // »
-  a_fork = Fork->allocate();
+  a_fork = Fork->create();
   
   ASSERT( Fork->thing(a_fork).pointer == a_fork );
   ASSERT( Fork->thing(a_fork).isa     == Fork->Fork );
@@ -38,11 +47,11 @@ CEST(fork, thing) { auto fork // »
   SUCCEED; }
 
 CEST(fork, insert) { auto fork // »
-  a_fork = Fork->allocate();
-  thing thing1 = Fork->thing(Fork->allocate()),
-        thing2 = Fork->thing(Fork->allocate()),
-        thing3 = Fork->thing(Fork->allocate()),
-        thing4 = Fork->thing(Fork->allocate());
+  a_fork = Fork->create();
+  thing thing1 = Fork->thing(Fork->create()),
+        thing2 = Fork->thing(Fork->create()),
+        thing3 = Fork->thing(Fork->create()),
+        thing4 = Fork->thing(Fork->create());
   
   /* Insert into empty fork */
   Fork->insert    (a_fork, thing2, 0);
@@ -67,10 +76,10 @@ CEST(fork, insert) { auto fork // »
   SUCCEED; }
 
 CEST(fork, prefix) {
-  fork  a_fork = Fork->allocate();
-  thing thing1 = Fork->thing(Fork->allocate()),
-        thing2 = Fork->thing(Fork->allocate()),
-        thing3 = Fork->thing(Fork->allocate());
+  fork  a_fork = Fork->create();
+  thing thing1 = Fork->thing(Fork->create()),
+        thing2 = Fork->thing(Fork->create()),
+        thing3 = Fork->thing(Fork->create());
   
   Fork->prefix    (a_fork, thing3);
   ASSERT( Fork->at(a_fork, 0).pointer == thing3.pointer );
@@ -87,10 +96,10 @@ CEST(fork, prefix) {
   SUCCEED; }
 
 CEST(fork, affix) {
-  fork  a_fork = Fork->allocate();
-  thing thing1 = Fork->thing(Fork->allocate()),
-        thing2 = Fork->thing(Fork->allocate()),
-        thing3 = Fork->thing(Fork->allocate());
+  fork  a_fork = Fork->create();
+  thing thing1 = Fork->thing(Fork->create()),
+        thing2 = Fork->thing(Fork->create()),
+        thing3 = Fork->thing(Fork->create());
   
   Fork->affix     (a_fork, thing1);
   ASSERT( Fork->at(a_fork, 0).pointer == thing1.pointer );
@@ -107,7 +116,7 @@ CEST(fork, affix) {
   SUCCEED; }
 
 CEST(fork, at) {
-  fork  a_fork = Fork->allocate();
+  fork  a_fork = Fork->create();
   
   /* Empty `fork`s */
   ASSERT( Fork->at(a_fork, 5).pointer == NULL    );
@@ -115,9 +124,9 @@ CEST(fork, at) {
   ASSERT( Fork->at(a_fork, 1).pointer == NULL    );
   ASSERT( Fork->at(a_fork, 0).pointer == NULL    );
   
-  thing thing1 = Fork->thing(Fork->allocate()); Fork->affix(a_fork, thing1);
-  thing thing2 = Fork->thing(Fork->allocate()); Fork->affix(a_fork, thing2);
-  thing thing3 = Fork->thing(Fork->allocate()); Fork->affix(a_fork, thing3);
+  thing thing1 = Fork->thing(Fork->create()); Fork->affix(a_fork, thing1);
+  thing thing2 = Fork->thing(Fork->create()); Fork->affix(a_fork, thing2);
+  thing thing3 = Fork->thing(Fork->create()); Fork->affix(a_fork, thing3);
   
   /* Positive indicies */
   ASSERT( Fork->at(a_fork, 0).pointer == thing1.pointer );
