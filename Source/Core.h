@@ -8,7 +8,7 @@
 
 
 /*  This macro is defined in one of two ways: if one or more Paws headers are included manually, or if
- *  `INTERNALIZE` is defiend (see `Paws.c`), then the `e()` macro has no effect (the name is not transformed.)
+ *  `INTERNALIZE` is defined (see `Paws.c`), then the `e()` macro has no effect (the name is not transformed.)
  *  However, if one includes the entire Paws header-set at once (via `#include "Paws.c"`), then `EXTERNALIZE`
  *  will be set, thus causing `e()` to, well, make names safe for externalization.
  *  
