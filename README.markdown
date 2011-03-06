@@ -2,6 +2,15 @@
 ========
 Welcome to the new world.
 
+Spelunking
+----------
+This distribution includes a file that describes many points of interest within the codebase, and should help you
+have an easier time exploring it.
+
+If you’re the sort who learns best by reading code instead of docs, head over to the [SPELUNKING][] file!
+
+  [SPELUNKING]: /elliottcable/Paws.c/blob/Master/SPELUNKING.markdown
+
 Compiling
 ---------
 
