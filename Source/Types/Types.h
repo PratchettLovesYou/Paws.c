@@ -23,8 +23,8 @@
 # include "Core.h"
 
 
-          struct e(list);
-typedef   struct e(list)*                 e(list);
+          struct e(fork);
+typedef   struct e(fork)*                 e(fork);
 
           struct e(execution);
 typedef   struct e(execution)*            e(execution);

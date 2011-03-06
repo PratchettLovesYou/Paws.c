@@ -96,7 +96,7 @@
 /*#     include "Ancillary/Threading/Threading.c" */
 /*#     include "Ancillary/Unit/Unit.c" */
 
-/*#     include "Types/list/list.c" */
+#       include "Types/fork/fork.c"
 /*#     include "Types/execution/execution.c" */
 
 #       include "Core.h"
@@ -161,7 +161,7 @@ void static Paws__register_Paws(void) { Paws = malloc(sizeof( struct Paws ));
 //Paws__register_Threading();
 //Paws__register_Unit();
 
-//Paws__register_Fork();
+  Paws__register_Fork();
 //Paws__register_Execution();
 
 //Paws__register_Number();
