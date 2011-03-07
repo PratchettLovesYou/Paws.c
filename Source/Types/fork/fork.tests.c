@@ -9,7 +9,7 @@ CEST(Fork, allocate) { auto struct fork * // »
   a_fork_struct = Fork->allocate();
   
   // This is an absolutely paltry test, but I don’t know what else I can do here. /=
-  ASSERT( a_fork_struct != NULL );
+  ASSERT_NOT_NULL( a_fork_struct );
   
   SUCCEED; }
 
@@ -17,9 +17,9 @@ CEST(Fork, initialize) { auto fork // »
   a_fork = Fork->allocate();
   
   Fork->initialize(a_fork);
-  ASSERT( a_fork->content->first  == NULL );
-  ASSERT( a_fork->content->last   == NULL );
-  ASSERT( a_fork->content->length == 0    );
+  ASSERT_NULL( a_fork->content->first );
+  ASSERT_NULL( a_fork->content->last );
+  ASSERT_ZERO( a_fork->content->length );
   
   SUCCEED; }
 
@@ -27,22 +27,22 @@ CEST(fork, naughtify) { auto fork rv, a_naughty, // »
   a_fork = Fork->create();
   
   rv = Fork->naughtify(a_fork);
-  ASSERT(        a_fork->content->length        == 1          );
-  ASSERT( LL->at(a_fork->content, 0)->thing.isa == Fork->Fork );
+  ASSERT_EQUAL( a_fork->content->length, 1 );
+  ASSERT_EQUAL( LL->at(a_fork->content, 0)->thing.isa, Fork->Fork );
   
   a_naughty = LL->at(a_fork->content, 0)->thing.pointer;
-  ASSERT( LL->at(a_naughty->content, 0)->thing.pointer == a_naughty );
-  ASSERT( LL->at(a_naughty->content, 0)->thing.isa     == Fork->Fork );
+  ASSERT_EQUAL( LL->at(a_naughty->content, 0)->thing.pointer, a_naughty );
+  ASSERT_EQUAL( LL->at(a_naughty->content, 0)->thing.isa,     Fork->Fork );
   
-  ASSERT( rv == a_naughty );
+  ASSERT_EQUAL( rv, a_naughty );
   
   SUCCEED; }
 
 CEST(fork, thing) { auto fork // »
   a_fork = Fork->create();
   
-  ASSERT( Fork->thing(a_fork).pointer == a_fork );
-  ASSERT( Fork->thing(a_fork).isa     == Fork->Fork );
+  ASSERT_EQUAL( Fork->thing(a_fork).pointer, a_fork );
+  ASSERT_EQUAL( Fork->thing(a_fork).isa,     Fork->Fork );
   
   SUCCEED; }
 
@@ -54,24 +54,24 @@ CEST(fork, insert) { auto fork a_fork; auto thing thing1, thing2, thing3, thing4
   thing4 = Fork->thing(Fork->create());
   
   /* Insert into empty fork */
-  Fork->insert    (a_fork, thing2, 0);
-  ASSERT( Fork->at(a_fork, 0).pointer == thing2.pointer );
-  ASSERT(          a_fork->content->length == 1                   );
+  Fork->insert(a_fork, thing2, 0);
+  ASSERT_EQUAL( Fork->at(a_fork, 0).pointer, thing2.pointer );
+  ASSERT_EQUAL( a_fork->content->length, 1 );
   
   /* Insert onto the front of fork */
-  Fork->insert    (a_fork, thing1, 0);
-  ASSERT( Fork->at(a_fork, 0).pointer == thing1.pointer );
-  ASSERT(          a_fork->content->length == 2                   );
+  Fork->insert(a_fork, thing1, 0);
+  ASSERT_EQUAL( Fork->at(a_fork, 0).pointer, thing1.pointer );
+  ASSERT_EQUAL( a_fork->content->length, 2 );
   
   /* Insert onto the end of fork */
-  Fork->insert    (a_fork, thing4, 2);
-  ASSERT( Fork->at(a_fork, 2).pointer == thing4.pointer );
-  ASSERT(          a_fork->content->length == 3                   );
+  Fork->insert(a_fork, thing4, 2);
+  ASSERT_EQUAL( Fork->at(a_fork, 2).pointer, thing4.pointer );
+  ASSERT_EQUAL( a_fork->content->length, 3 );
   
   /* Insert into fork */
-  Fork->insert    (a_fork, thing3, 2);
-  ASSERT( Fork->at(a_fork, 2).pointer == thing3.pointer );
-  ASSERT(          a_fork->content->length == 4                   );
+  Fork->insert(a_fork, thing3, 2);
+  ASSERT_EQUAL( Fork->at(a_fork, 2).pointer, thing3.pointer );
+  ASSERT_EQUAL( a_fork->content->length, 4 );
   
   SUCCEED; }
 
@@ -81,17 +81,17 @@ CEST(fork, prefix) { auto fork a_fork; auto thing thing1, thing2, thing3;
   thing2 = Fork->thing(Fork->create());
   thing3 = Fork->thing(Fork->create());
   
-  Fork->prefix    (a_fork, thing3);
-  ASSERT( Fork->at(a_fork, 0).pointer == thing3.pointer );
-  ASSERT(          a_fork->content->length == 1                   );
+  Fork->prefix(a_fork, thing3);
+  ASSERT_EQUAL( Fork->at(a_fork, 0).pointer, thing3.pointer );
+  ASSERT_EQUAL( a_fork->content->length, 1 );
   
-  Fork->prefix    (a_fork, thing2);
-  ASSERT( Fork->at(a_fork, 0).pointer == thing2.pointer );
-  ASSERT(          a_fork->content->length == 2                   );
+  Fork->prefix(a_fork, thing2);
+  ASSERT_EQUAL( Fork->at(a_fork, 0).pointer, thing2.pointer );
+  ASSERT_EQUAL( a_fork->content->length, 2 );
   
-  Fork->prefix    (a_fork, thing1);
-  ASSERT( Fork->at(a_fork, 0).pointer == thing1.pointer );
-  ASSERT(          a_fork->content->length == 3                   );
+  Fork->prefix(a_fork, thing1);
+  ASSERT_EQUAL( Fork->at(a_fork, 0).pointer, thing1.pointer );
+  ASSERT_EQUAL( a_fork->content->length, 3 );
   
   SUCCEED; }
 
@@ -101,17 +101,17 @@ CEST(fork, affix) { auto fork a_fork; auto thing thing1, thing2, thing3;
   thing2 = Fork->thing(Fork->create()),
   thing3 = Fork->thing(Fork->create());
   
-  Fork->affix     (a_fork, thing1);
-  ASSERT( Fork->at(a_fork, 0).pointer == thing1.pointer );
-  ASSERT(          a_fork->content->length == 1                   );
+  Fork->affix(a_fork, thing1);
+  ASSERT_EQUAL( Fork->at(a_fork, 0).pointer, thing1.pointer );
+  ASSERT_EQUAL( a_fork->content->length, 1 );
   
-  Fork->affix     (a_fork, thing2);
-  ASSERT( Fork->at(a_fork, 1).pointer == thing2.pointer );
-  ASSERT(          a_fork->content->length == 2                   );
+  Fork->affix(a_fork, thing2);
+  ASSERT_EQUAL( Fork->at(a_fork, 1).pointer, thing2.pointer );
+  ASSERT_EQUAL( a_fork->content->length, 2 );
   
-  Fork->affix     (a_fork, thing3);
-  ASSERT( Fork->at(a_fork, 2).pointer == thing3.pointer );
-  ASSERT(          a_fork->content->length == 3                   );
+  Fork->affix(a_fork, thing3);
+  ASSERT_EQUAL( Fork->at(a_fork, 2).pointer, thing3.pointer );
+  ASSERT_EQUAL( a_fork->content->length, 3 );
   
   SUCCEED; }
 
@@ -119,22 +119,22 @@ CEST(fork, at) { auto fork a_fork; auto thing thing1, thing2, thing3;
   a_fork = Fork->create();
   
   /* Empty `fork`s */
-  ASSERT( Fork->at(a_fork, 5).pointer == NULL    );
-  ASSERT( Fork->at(a_fork, 4).pointer == NULL    );
-  ASSERT( Fork->at(a_fork, 1).pointer == NULL    );
-  ASSERT( Fork->at(a_fork, 0).pointer == NULL    );
+  ASSERT_NULL( Fork->at(a_fork, 5).pointer );
+  ASSERT_NULL( Fork->at(a_fork, 4).pointer );
+  ASSERT_NULL( Fork->at(a_fork, 1).pointer );
+  ASSERT_NULL( Fork->at(a_fork, 0).pointer );
   
   thing1 = Fork->thing(Fork->create()); Fork->affix(a_fork, thing1);
   thing2 = Fork->thing(Fork->create()); Fork->affix(a_fork, thing2);
   thing3 = Fork->thing(Fork->create()); Fork->affix(a_fork, thing3);
   
   /* Positive indicies */
-  ASSERT( Fork->at(a_fork, 0).pointer == thing1.pointer );
-  ASSERT( Fork->at(a_fork, 1).pointer == thing2.pointer );
-  ASSERT( Fork->at(a_fork, 2).pointer == thing3.pointer );
+  ASSERT_EQUAL( Fork->at(a_fork, 0).pointer, thing1.pointer );
+  ASSERT_EQUAL( Fork->at(a_fork, 1).pointer, thing2.pointer );
+  ASSERT_EQUAL( Fork->at(a_fork, 2).pointer, thing3.pointer );
   
   /* OOB indicies */
-  ASSERT( Fork->at(a_fork, 5).pointer == NULL    );
-  ASSERT( Fork->at(a_fork, 4).pointer == NULL    );
+  ASSERT_NULL( Fork->at(a_fork, 5).pointer );
+  ASSERT_NULL( Fork->at(a_fork, 4).pointer );
   
   SUCCEED; }

@@ -17,7 +17,7 @@ CEST(LL, allocate) { auto struct ll * // »
   a_ll_pointer = LL->allocate();
   
   // This is an absolutely paltry test, but I don’t know what else I can do here. /=
-  ASSERT( a_ll_pointer != NULL );
+  ASSERT_NOT_NULL( a_ll_pointer );
   
   SUCCEED; }
 
@@ -25,9 +25,9 @@ CEST(LL, initialize) { auto struct ll * // »
   a_ll_pointer = LL->allocate();
   
   LL->initialize(a_ll_pointer);
-  ASSERT( (*a_ll_pointer).first  == NULL );
-  ASSERT( (*a_ll_pointer).last   == NULL );
-  ASSERT( (*a_ll_pointer).length == 0    );
+  ASSERT_NULL( (*a_ll_pointer).first );
+  ASSERT_NULL( (*a_ll_pointer).last );
+  ASSERT_ZERO( (*a_ll_pointer).length );
   
   SUCCEED; }
 
@@ -40,12 +40,12 @@ CEST(ll, anterior_insert) { auto ll a_ll; auto element element1, element2, eleme
   
   /* TODO: Error condition */
   LL->anterior_insert(a_ll, elementA, 0);
-  ASSERT( LL->at(a_ll, 0) == element1 );
+  ASSERT_EQUAL( LL->at(a_ll, 0), element1 );
   
   LL->anterior_insert(a_ll, elementA, 1);
-  ASSERT( LL->at(a_ll, 0) == element1 );
-  ASSERT( LL->at(a_ll, 1) == elementA );
-  ASSERT( LL->at(a_ll, 2) == element2 );
+  ASSERT_EQUAL( LL->at(a_ll, 0), element1 );
+  ASSERT_EQUAL( LL->at(a_ll, 1), elementA );
+  ASSERT_EQUAL( LL->at(a_ll, 2), element2 );
   
   SUCCEED; }
 
@@ -58,12 +58,12 @@ CEST(ll, posterior_insert) { auto ll a_ll; auto element element1, element2, elem
   
   /* TODO: Error condition */
   LL->posterior_insert(a_ll, elementA, a_ll->length);
-  ASSERT( LL->at(a_ll, 0) == element1 );
+  ASSERT_EQUAL( LL->at(a_ll, 0), element1 );
   
   LL->posterior_insert(a_ll, elementA, 1);
-  ASSERT( LL->at(a_ll, 0) == element1 );
-  ASSERT( LL->at(a_ll, 1) == elementA );
-  ASSERT( LL->at(a_ll, 2) == element2 );
+  ASSERT_EQUAL( LL->at(a_ll, 0), element1 );
+  ASSERT_EQUAL( LL->at(a_ll, 1), elementA );
+  ASSERT_EQUAL( LL->at(a_ll, 2), element2 );
   
   SUCCEED; }
 
@@ -74,19 +74,19 @@ CEST(ll, prefix) { auto ll a_ll; auto element element1, element2, element3;
   element3 = Element->create(SOMETHING);
   
   LL->prefix(a_ll, element3);
-  ASSERT( a_ll->length == 1        );
-  ASSERT( a_ll->first  == element3 );
-  ASSERT( a_ll->last   == element3 );
+  ASSERT_EQUAL( a_ll->length, 1 );
+  ASSERT_EQUAL( a_ll->first,  element3 );
+  ASSERT_EQUAL( a_ll->last,   element3 );
   
   LL->prefix(a_ll, element2);
-  ASSERT( a_ll->length == 2        );
-  ASSERT( a_ll->first  == element2 );
-  ASSERT( a_ll->last   == element3 );
+  ASSERT_EQUAL( a_ll->length, 2 );
+  ASSERT_EQUAL( a_ll->first,  element2 );
+  ASSERT_EQUAL( a_ll->last,   element3 );
   
   LL->prefix(a_ll, element1);
-  ASSERT( a_ll->length == 3        );
-  ASSERT( a_ll->first  == element1 );
-  ASSERT( a_ll->last   == element3 );
+  ASSERT_EQUAL( a_ll->length, 3 );
+  ASSERT_EQUAL( a_ll->first,  element1 );
+  ASSERT_EQUAL( a_ll->last,   element3 );
   
   SUCCEED; }
 
@@ -97,19 +97,19 @@ CEST(ll, affix) { auto ll a_ll; auto element element1, element2, element3;
   element3 = Element->create(SOMETHING);
   
   LL->affix(a_ll, element1);
-  ASSERT( a_ll->length == 1        );
-  ASSERT( a_ll->first  == element1 );
-  ASSERT( a_ll->last   == element1 );
+  ASSERT_EQUAL( a_ll->length, 1 );
+  ASSERT_EQUAL( a_ll->first,  element1 );
+  ASSERT_EQUAL( a_ll->last,   element1 );
   
   LL->affix(a_ll, element2);
-  ASSERT( a_ll->length == 2        );
-  ASSERT( a_ll->first  == element1 );
-  ASSERT( a_ll->last   == element2 );
+  ASSERT_EQUAL( a_ll->length, 2 );
+  ASSERT_EQUAL( a_ll->first,  element1 );
+  ASSERT_EQUAL( a_ll->last,   element2 );
   
   LL->affix(a_ll, element3);
-  ASSERT( a_ll->length == 3        );
-  ASSERT( a_ll->first  == element1 );
-  ASSERT( a_ll->last   == element3 );
+  ASSERT_EQUAL( a_ll->length, 3 );
+  ASSERT_EQUAL( a_ll->first,  element1 );
+  ASSERT_EQUAL( a_ll->last,   element3 );
   
   SUCCEED; }
 
@@ -117,22 +117,22 @@ CEST(ll, at) { auto ll a_ll; auto element element1, element2, element3;
   a_ll = LL->create();
   
   /* Empty `ll`s */
-  ASSERT( LL->at(a_ll,  5) == NULL );
-  ASSERT( LL->at(a_ll,  1) == NULL );
-  ASSERT( LL->at(a_ll,  0) == NULL );
+  ASSERT_NULL( LL->at(a_ll, 5) );
+  ASSERT_NULL( LL->at(a_ll, 1) );
+  ASSERT_NULL( LL->at(a_ll, 0) );
   
   element1 = Element->create(SOMETHING); LL->affix(a_ll, element1);
   element2 = Element->create(SOMETHING); LL->affix(a_ll, element2);
   element3 = Element->create(SOMETHING); LL->affix(a_ll, element3);
   
   /* Positive indicies */
-  ASSERT( LL->at(a_ll,  0) == element1 );
-  ASSERT( LL->at(a_ll,  1) == element2 );
-  ASSERT( LL->at(a_ll,  2) == element3 );
+  ASSERT_EQUAL( LL->at(a_ll, 0), element1 );
+  ASSERT_EQUAL( LL->at(a_ll, 1), element2 );
+  ASSERT_EQUAL( LL->at(a_ll, 2), element3 );
   
   /* OOB indicies */
-  ASSERT( LL->at(a_ll,  5) == NULL );
-  ASSERT( LL->at(a_ll,  4) == NULL );
+  ASSERT_NULL( LL->at(a_ll, 5) );
+  ASSERT_NULL( LL->at(a_ll, 4) );
   
   SUCCEED; }
 
@@ -141,7 +141,7 @@ CEST(Element, allocate) { auto struct element * // »
   an_element_pointer = Element->allocate();
   
   // This is an absolutely paltry test, but I don’t know what else I can do here. /=
-  ASSERT( an_element_pointer != NULL );
+  ASSERT_NOT_NULL( an_element_pointer );
   
   SUCCEED; }
 
@@ -149,8 +149,8 @@ CEST(Element, initialize) { auto struct element * // »
   an_element_pointer = Element->allocate();
   
   Element->initialize(an_element_pointer, SOMETHING);
-  ASSERT( (*an_element_pointer).next     == NULL );
-  ASSERT( (*an_element_pointer).previous == NULL );
+  ASSERT_NULL( (*an_element_pointer).next );
+  ASSERT_NULL( (*an_element_pointer).previous );
   
   SUCCEED; }
 
@@ -172,8 +172,8 @@ CEST(element, prefix) { auto element // »
    * > [***] node1 node3
    */
   Element->prefix(element3, element1);
-  ASSERT( element1->previous == NULL     && element1->next == element3 );
-  ASSERT( element3->previous == element1 && element3->next == NULL     );
+  ASSERT_NULL ( element1->previous );           ASSERT_EQUAL( element1->next, element3 );
+  ASSERT_EQUAL( element3->previous, element1 ); ASSERT_NULL ( element3->next );
   
   
   /* A single prefix that pushes old nodes */
@@ -185,9 +185,9 @@ CEST(element, prefix) { auto element // »
    * > [***] node1 node2 node3
    */
   Element->prefix(element3, element2);
-  ASSERT( element1->previous == NULL     && element1->next == element2 );
-  ASSERT( element2->previous == element1 && element2->next == element3 );
-  ASSERT( element3->previous == element2 && element3->next == NULL     );
+  ASSERT_NULL ( element1->previous );           ASSERT_EQUAL( element1->next, element2 );
+  ASSERT_EQUAL( element2->previous, element1 ); ASSERT_EQUAL( element2->next, element3 );
+  ASSERT_EQUAL( element3->previous, element2 ); ASSERT_NULL ( element3->next );
   
   
   Element->affix(elementA, elementB);
@@ -203,13 +203,13 @@ CEST(element, prefix) { auto element // »
    * > [***] nodeA nodeB node2 node3
    */
   Element->prefix(element2, elementB);
-  ASSERT( elementA->previous == NULL     && elementA->next == elementB );
-  ASSERT( elementB->previous == elementA && elementB->next == element2 );
-  ASSERT( element2->previous == elementB && element2->next == element3 );
-  ASSERT( element3->previous == element2 && element3->next == NULL     );
+  ASSERT_NULL ( elementA->previous );           ASSERT_EQUAL( elementA->next, elementB );
+  ASSERT_EQUAL( elementB->previous, elementA ); ASSERT_EQUAL( elementB->next, element2 );
+  ASSERT_EQUAL( element2->previous, elementB ); ASSERT_EQUAL( element2->next, element3 );
+  ASSERT_EQUAL( element3->previous, element2 ); ASSERT_NULL ( element3->next );
   
-  ASSERT( elementC->previous != elementB );
-  ASSERT( element1->next     != element2 );
+  ASSERT_NOT_EQUAL( elementC->previous, elementB );
+  ASSERT_NOT_EQUAL( element1->next,     element2 );
   
   
   SUCCEED; }
@@ -232,8 +232,8 @@ CEST(element, affix) { auto element // »
    * > node1 node3 [***]
    */
   Element->affix(element1, element3);
-  ASSERT( element1->previous == NULL     && element1->next == element3 );
-  ASSERT( element3->previous == element1 && element3->next == NULL     );
+  ASSERT_NULL ( element1->previous );           ASSERT_EQUAL( element1->next, element3 );
+  ASSERT_EQUAL( element3->previous, element1 ); ASSERT_NULL ( element3->next );
   
   
   /* A single affix that pushes old nodes */
@@ -245,9 +245,9 @@ CEST(element, affix) { auto element // »
    * > node1 node2 node3 [***]
    */
   Element->affix(element1, element2);
-  ASSERT( element1->previous == NULL     && element1->next == element2 );
-  ASSERT( element2->previous == element1 && element2->next == element3 );
-  ASSERT( element3->previous == element2 && element3->next == NULL     );
+  ASSERT_NULL ( element1->previous );           ASSERT_EQUAL( element1->next, element2 );
+  ASSERT_EQUAL( element2->previous, element1 ); ASSERT_EQUAL( element2->next, element3 );
+  ASSERT_EQUAL( element3->previous, element2 ); ASSERT_NULL ( element3->next );
   
   
   Element->affix(elementA, elementB);
@@ -263,13 +263,13 @@ CEST(element, affix) { auto element // »
    *   nodeA [***]   …   node3 [***]
    */
   Element->affix(element2, elementB);
-  ASSERT( element1->previous == NULL     && element1->next == element2 );
-  ASSERT( element2->previous == element1 && element2->next == elementB );
-  ASSERT( elementB->previous == element2 && elementB->next == elementC );
-  ASSERT( elementC->previous == elementB && elementC->next == NULL     );
+  ASSERT_NULL ( element1->previous );           ASSERT_EQUAL( element1->next, element2 );
+  ASSERT_EQUAL( element2->previous, element1 ); ASSERT_EQUAL( element2->next, elementB );
+  ASSERT_EQUAL( elementB->previous, element2 ); ASSERT_EQUAL( elementB->next, elementC );
+  ASSERT_EQUAL( elementC->previous, elementB ); ASSERT_NULL ( elementC->next );
   
-  ASSERT( element3->previous != element2 );
-  ASSERT( elementA->next     != elementB );
+  ASSERT_NOT_EQUAL( element3->previous, element2 );
+  ASSERT_NOT_EQUAL( elementA->next,     elementB );
   
   
   SUCCEED; }
