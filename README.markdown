@@ -13,7 +13,31 @@ If you’re the sort who learns best by reading code instead of docs, head over 
 
 Compiling
 ---------
-
+Using the `C99` function below, you can use the following (compatible with `$CC` set to either `clang` or `gcc`,
+right now):
+    
+    # Compiling library (TODO)
+    #   (I’ll admit it. I have no idea how to compile a shared library, or even how to make Paws capable of being
+    #    compiled as a shared library.)
+    
+    # Compiling executable (TODO)
+    #C99 -ISource \
+    #  Source/Types/fork/ll.tests.c \
+    #  Source/Types/fork/fork.tests.c \
+    #Source/Executable/Paws.c.c && ./Paws.c.o
+    
+    # Compiling and running all tests
+    C99   -IVendor -DCEST__NO_AUTO Vendor/Cest.c/Source/Cest.c   -ISource \
+      Source/Types/fork/ll.tests.c \
+      Source/Types/fork/fork.tests.c \
+    Source/Paws.tests.c && ./Paws.tests.o
+    
+    # Compiling and running all tests with gdb
+    C99 -ggdb   -IVendor -DCEST__NO_AUTO Vendor/Cest.c/Source/Cest.c   -ISource \
+      Source/Types/fork/ll.tests.c \
+      Source/Types/fork/fork.tests.c \
+    Source/Paws.tests.c && gdb -q -se ./Paws.tests.o
+    
 ### Makefile
 This project will almost certainly never have a makefile. I love ISO C, and I love the CPP, so don’t
 misunderstand me for simply being too pandered-to by modern toolsets to handle the complexity:
@@ -28,7 +52,7 @@ small, with file watchers, SHA1 comparison, git integration, and in-file depende
 
 Until then…
     
-    zsh;
+    zsh; # I’m not very familiar with bash.
     C99() { eval local last="\$$#"; last=${last##*/}; $CC -std=c99 -pedantic-errors -Wall -O0 -o "${last%.*}.o" "$@" }
     
 (-;
