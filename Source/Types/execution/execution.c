@@ -1,20 +1,20 @@
-#if !defined(ROUTINE_DECLARATIONS)
-# define     ROUTINE_DECLARATIONS
+# if !defined(ROUTINE_DECLARATIONS)
+#   define    ROUTINE_DECLARATIONS
 
-#if !defined(DECLARATIONS)
-# define ROUTINE_C__BEHEST
-# define DECLARATIONS
-#endif
-#   include "Paws.c/Core.h"
-#   include "Paws.c/Types/Types.h"
+# if !defined(DECLARATIONS)
+#   define ROUTINE_C__BEHEST
+#   define DECLARATIONS
+# endif
+#     include "Paws.c/Core.h"
+#     include "Paws.c/Types/Types.h"
 
-#   include "ast.c"
-#   include "Paws.c/Types/list/list.c"
+#     include "ast.c"
+#     include "Paws.c/Types/list/list.c"
 
-#   include <stdbool.h>
-#if defined(ROUTINE_C__BEHEST)
-# undef DECLARATIONS
-#endif
+#     include <stdbool.h>
+# if defined(ROUTINE_C__BEHEST)
+#   undef DECLARATIONS
+# endif
 
 
 /* =========================
@@ -66,17 +66,18 @@ struct E(Routine) {
   E(thing)      (*thing)      ( E(routine) this );
   void          (*execute)    ( E(routine) this, E(thing) argument );
 };
-#if !defined(EXTERNALIZE)
-  struct E(Routine) extern *Routine;
-#endif
+# if !defined(EXTERNALIZE)
+    struct E(Routine) extern *Routine;
+# endif
 
 void    Paws__register_Routine    ( void );
 
 
 
-#endif
-#if !defined(DECLARATIONS) && !defined(ROUTINE_IMPLEMENTATION) /* ======================================= BODY */
-# define                               ROUTINE_IMPLEMENTATION
+# endif
+# if !defined(ROUTINE_IMPLEMENTATION) && !defined(DECLARATIONS) /* ====================================== BODY */
+#   define    ROUTINE_IMPLEMENTATION
+
 # define DECLARATIONS
 #   include "Paws.c/Paws.c"
 #   include <stdlib.h>
@@ -180,4 +181,4 @@ void routine__execute(routine this, thing argument) {
   return;
 }
 
-#endif
+# endif

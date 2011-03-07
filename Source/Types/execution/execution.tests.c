@@ -1,8 +1,8 @@
-#include "routine.c"
+# include "routine.c"
 
-#define DECLARATIONS
-# include "Cest.c"
-#undef  DECLARATIONS
+# define DECLARATIONS
+#   include "Cest.c"
+# undef  DECLARATIONS
 
 
 void a_native(void) { return; }

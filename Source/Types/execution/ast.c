@@ -1,15 +1,15 @@
-#if !defined(AST_DECLARATIONS)
-# define     AST_DECLARATIONS
+# if !defined(AST_DECLARATIONS)
+#   define    AST_DECLARATIONS
 
-#if !defined(DECLARATIONS)
-# define AST_C__BEHEST
-# define DECLARATIONS
-#endif
-#   include "Paws.c/Core.h"
-#   include "Paws.c/Types/Types.h"
-#if defined(AST_C__BEHEST)
-# undef DECLARATIONS
-#endif
+# if !defined(DECLARATIONS)
+#   define AST_C__BEHEST
+#   define DECLARATIONS
+# endif
+#     include "Paws.c/Core.h"
+#     include "Paws.c/Types/Types.h"
+# if defined(AST_C__BEHEST)
+#   undef DECLARATIONS
+# endif
 
 
 /* ======
@@ -46,9 +46,9 @@ struct E(node) {
 
 /* This name is reserved, but unused */
 struct E(AST) { void (*nothing)(void); };
-#if !defined(EXTERNALIZE)
-  struct E(AST) extern *AST;
-#endif
+# if !defined(EXTERNALIZE)
+    struct E(AST) extern *AST;
+# endif
 
 struct E(Node) {
   /* `Node` functions */
@@ -66,18 +66,19 @@ struct E(Node) {
   E(node)   (*duplicate)      ( E(node) this );
   E(node)   (*instantiate)    ( E(node) this );
 };
-#if !defined(EXTERNALIZE)
-  struct E(Node) extern *Node;
-#endif
+# if !defined(EXTERNALIZE)
+    struct E(Node) extern *Node;
+# endif
 
 void    Paws__register_AST    ( void );
 void    Paws__register_Node   ( void );
 
 
 
-#endif
-#if !defined(DECLARATIONS) && !defined(AST_IMPLEMENTATION) /* =========================================== BODY */
-# define                               AST_IMPLEMENTATION
+# endif
+# if !defined(AST_IMPLEMENTATION) && !defined(DECLARATIONS) /* ========================================== BODY */
+#   define    AST_IMPLEMENTATION
+
 # define DECLARATIONS
 #   include <stdlib.h>
 #   include <string.h>
@@ -267,4 +268,4 @@ node _node__duplicate(node this, bool set_archetype) {
   return new;
 }
 
-#endif
+# endif

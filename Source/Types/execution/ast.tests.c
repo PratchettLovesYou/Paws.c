@@ -1,8 +1,8 @@
-#include "ast.c"
+# include "ast.c"
 
-#define DECLARATIONS
-# include "Cest.c"
-#undef  DECLARATIONS
+# define DECLARATIONS
+#   include "Cest.c"
+# undef  DECLARATIONS
 
 
 CEST(Node, allocate) {
