@@ -23,21 +23,6 @@ CEST(Fork, initialize) { auto fork // »
   
   SUCCEED; }
 
-CEST(fork, naughtify) { auto fork rv, a_naughty, // »
-  a_fork = Fork->create();
-  
-  rv = Fork->naughtify(a_fork);
-  ASSERT_EQUAL( a_fork->content->length, 1 );
-  ASSERT_EQUAL( LL->at(a_fork->content, 0)->thing.isa, Fork->Fork );
-  
-  a_naughty = LL->at(a_fork->content, 0)->thing.pointer;
-  ASSERT_EQUAL( LL->at(a_naughty->content, 0)->thing.pointer, a_naughty );
-  ASSERT_EQUAL( LL->at(a_naughty->content, 0)->thing.isa,     Fork->Fork );
-  
-  ASSERT_EQUAL( rv, a_naughty );
-  
-  SUCCEED; }
-
 CEST(fork, thing) { auto fork // »
   a_fork = Fork->create();
   

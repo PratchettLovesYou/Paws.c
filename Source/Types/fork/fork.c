@@ -29,7 +29,6 @@ struct e(fork) *    (*allocate)      (void);
   /// `struct fork` instance functions
 e(fork)             (*initialize)   ( struct e(fork)* this );
 e(thing)            (*thing)        ( e(fork) this );
-e(fork)             (*naughtify)    ( e(fork) this );
   void              (*insert)       ( e(fork) this, e(thing) child, e(ll_size) idx );
   void              (*prefix)       ( e(fork) this, e(thing) child );
   void              (*affix)        ( e(fork) this, e(thing) child );
@@ -57,7 +56,6 @@ static    fork            Fork__create       (void);
 static    struct fork *   Fork__allocate     (void);
 
 static    fork            fork__initialize   (fork this);
-static    fork            fork__naughtify    (fork this);
 static    thing           fork__thing        (fork this);
 static    void            fork__insert       (fork this, thing child, ll_size idx);
 static    void            fork__prefix       (fork this, thing child);
@@ -81,7 +79,6 @@ void Paws__register_Fork(void) { Fork         = malloc(sizeof( struct Fork ));
     .allocate     = Fork__allocate,
     
     .initialize   = fork__initialize,
-    .naughtify    = fork__naughtify,
     .thing        = fork__thing,
     .insert       = fork__insert,
     .prefix       = fork__prefix,
@@ -105,14 +102,6 @@ fork fork__initialize(fork this) {
   this->content = LL->create();
   
   return this; }
-
-fork fork__naughtify(fork this) { auto fork // »
-  naughty = Fork->create();
-  
-  Fork->insert(naughty, Fork->thing(naughty), 0);
-  Fork->insert(   this, Fork->thing(naughty), 0);
-  
-  return naughty; }
 
 thing fork__thing(fork this) { auto struct thing // »
   something = { .pointer = this, .isa = Fork->Fork };
