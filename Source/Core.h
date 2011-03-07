@@ -38,7 +38,7 @@
 
 #   define IF_EXTERNALIZED(CODE) // fizzle
 #   define IF_INTERNALIZED(CODE) CODE
-# endif //defined(EXTERNALIZE)
+# endif
 
 
 /* Yes, I’m a pedant. Get over it. */
@@ -48,24 +48,24 @@ typedef   void *    e(pointer);
 # if !defined(__has_attribute)
 #   define has_no_has_attribute
 #   define __has_attribute(x) 0
-# endif //!defined(__has_attribute)
+# endif
 
 #   if __has_attribute(constructor)
 #     define __constructor __attribute__((constructor))
 #   else
 #     define __constructor
-#   endif //__has_attribute(constructor)
+#   endif
 
 #   if __has_attribute(packed)
 #     define __packed __attribute__((packed))
 #   else
 #     define __packed
-#   endif //__has_attribute(packed)
+#   endif
 
 # if defined(has_no_has_attribute)
 #   undef has_no_has_attribute
 #   undef __has_attribute
-# endif //!defined(__has_attribute)
+# endif
 
 
 # endif //!defined(CORE_DECLARATIONS)

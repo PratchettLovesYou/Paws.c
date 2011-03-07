@@ -86,11 +86,11 @@
 # if defined(DECLARATIONS) && !defined(INTERNALIZE)
 #   define PAWS_C__BEHEST__EXTERNALIZE
 #   define EXTERNALIZE
-# endif //defined(DECLARATIONS) && !defined(INTERNALIZE)
+# endif
 #   if !defined(DECLARATIONS)
 #     define PAWS_C__BEHEST
 #     define DECLARATIONS
-#   endif //!defined(DECLARATIONS)
+#   endif
 #       include <stdbool.h>
 
 /*#     include "Ancillary/Threading/Threading.c" */
@@ -103,10 +103,10 @@
 #       include "Types/Types.h"
 #   if defined(PAWS_C__BEHEST)
 #     undef DECLARATIONS
-#   endif //defined(PAWS_C__BEHEST)
+#   endif
 # if defined(PAWS_C__BEHEST__EXTERNALIZE)
 #   undef EXTERNALIZE
-# endif //defined(PAWS_C__BEHEST__EXTERNALIZE)
+# endif
 
 
 struct Paws {

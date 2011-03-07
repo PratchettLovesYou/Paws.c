@@ -22,14 +22,14 @@
 # if !defined(DECLARATIONS)
 #   define LL_C__BEHEST
 #   define DECLARATIONS
-# endif //!defined(DECLARATIONS)
+# endif
 #     include "Core.h"
 #     include "Types/Types.h"
 
 #     include <limits.h>
 # if defined(LL_C__BEHEST)
 #   undef DECLARATIONS
-# endif //defined(LL_C__BEHEST)
+# endif
 
 
           struct e(element);
