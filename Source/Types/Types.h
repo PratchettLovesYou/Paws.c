@@ -24,17 +24,17 @@
 
 
           struct e(fork);
-typedef   struct e(fork)*                 e(fork);
+typedef   struct e(fork) *                  e(fork);
 
           struct e(execution);
-typedef   struct e(execution)*            e(execution);
+typedef   struct e(execution) *             e(execution);
 
 
           struct e(thing);
-typedef   struct e(thing)                 e(thing);
+typedef   struct e(thing)                   e(thing);
 
           struct e(typeRepresentation);
-typedef   struct e(typeRepresentation)*   e(typeRepresentation);
+typedef   struct e(typeRepresentation) *    e(typeRepresentation);
 
 
 struct e(typeRepresentation) {

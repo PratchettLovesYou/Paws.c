@@ -34,8 +34,8 @@
 
           struct e(element);
           struct e(ll);
-typedef   struct e(element)*        e(element);
-typedef   struct e(ll)*             e(ll);
+typedef   struct e(element) *       e(element);
+typedef   struct e(ll) *            e(ll);
 
 typedef   unsigned long long int    e(ll_size);
 
@@ -154,7 +154,7 @@ void Paws__register_LL(void) { LL   = malloc(sizeof( struct LL ));
 element Element__create(thing target) {
   return Element->initialize(Element->allocate(), target); }
 
-struct element* Element__allocate(void) {
+struct element * Element__allocate(void) {
   return malloc(sizeof( struct element )); }
 
 element element__initialize(struct element* this, thing target) {
@@ -212,7 +212,7 @@ void element__affix(element this, element other) {
 ll LL__create(void) {
   return LL->initialize(LL->allocate()); }
 
-struct ll* LL__allocate(void) {
+struct ll * LL__allocate(void) {
   return malloc(sizeof( struct ll )); }
 
 ll ll__initialize(struct ll* this) {
