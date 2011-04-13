@@ -19,7 +19,7 @@ CEST(LL, allocate) { auto struct ll * // »
   // This is an absolutely paltry test, but I don’t know what else I can do here. /=
   ASSERT_NOT_NULL( a_ll_pointer );
   
-  SUCCEED; }
+  SUCCEED; }}
 
 CEST(LL, initialize) { auto struct ll * // »
   a_ll_pointer = LL->allocate();
@@ -29,7 +29,7 @@ CEST(LL, initialize) { auto struct ll * // »
   ASSERT_NULL( (*a_ll_pointer).last );
   ASSERT_ZERO( (*a_ll_pointer).length );
   
-  SUCCEED; }
+  SUCCEED; }}
 
 CEST(ll, anterior_insert) { auto ll a_ll; auto element element1, element2, element3, elementA;
   a_ll = LL->create();
@@ -47,7 +47,7 @@ CEST(ll, anterior_insert) { auto ll a_ll; auto element element1, element2, eleme
   ASSERT_EQUAL( LL->at(a_ll, 1), elementA );
   ASSERT_EQUAL( LL->at(a_ll, 2), element2 );
   
-  SUCCEED; }
+  SUCCEED; }}
 
 CEST(ll, posterior_insert) { auto ll a_ll; auto element element1, element2, element3, elementA;
   a_ll = LL->create();
@@ -65,7 +65,7 @@ CEST(ll, posterior_insert) { auto ll a_ll; auto element element1, element2, elem
   ASSERT_EQUAL( LL->at(a_ll, 1), elementA );
   ASSERT_EQUAL( LL->at(a_ll, 2), element2 );
   
-  SUCCEED; }
+  SUCCEED; }}
 
 CEST(ll, prefix) { auto ll a_ll; auto element element1, element2, element3;
   a_ll = LL->create();
@@ -88,7 +88,7 @@ CEST(ll, prefix) { auto ll a_ll; auto element element1, element2, element3;
   ASSERT_EQUAL( a_ll->first,  element1 );
   ASSERT_EQUAL( a_ll->last,   element3 );
   
-  SUCCEED; }
+  SUCCEED; }}
 
 CEST(ll, affix) { auto ll a_ll; auto element element1, element2, element3;
   a_ll = LL->create();
@@ -111,7 +111,7 @@ CEST(ll, affix) { auto ll a_ll; auto element element1, element2, element3;
   ASSERT_EQUAL( a_ll->first,  element1 );
   ASSERT_EQUAL( a_ll->last,   element3 );
   
-  SUCCEED; }
+  SUCCEED; }}
 
 CEST(ll, at) { auto ll a_ll; auto element element1, element2, element3;
   a_ll = LL->create();
@@ -134,7 +134,7 @@ CEST(ll, at) { auto ll a_ll; auto element element1, element2, element3;
   ASSERT_NULL( LL->at(a_ll, 5) );
   ASSERT_NULL( LL->at(a_ll, 4) );
   
-  SUCCEED; }
+  SUCCEED; }}
 
 
 CEST(Element, allocate) { auto struct element * // »
@@ -143,7 +143,7 @@ CEST(Element, allocate) { auto struct element * // »
   // This is an absolutely paltry test, but I don’t know what else I can do here. /=
   ASSERT_NOT_NULL( an_element_pointer );
   
-  SUCCEED; }
+  SUCCEED; }}
 
 CEST(Element, initialize) { auto struct element * // »
   an_element_pointer = Element->allocate();
@@ -152,7 +152,7 @@ CEST(Element, initialize) { auto struct element * // »
   ASSERT_NULL( (*an_element_pointer).next );
   ASSERT_NULL( (*an_element_pointer).previous );
   
-  SUCCEED; }
+  SUCCEED; }}
 
 CEST(element, prefix) { auto element // »
   element1 = Element->create(SOMETHING),
@@ -212,7 +212,7 @@ CEST(element, prefix) { auto element // »
   ASSERT_NOT_EQUAL( element1->next,     element2 );
   
   
-  SUCCEED; }
+  SUCCEED; }}
 
 CEST(element, affix) { auto element // »
   element1 = Element->create(SOMETHING),
@@ -272,4 +272,4 @@ CEST(element, affix) { auto element // »
   ASSERT_NOT_EQUAL( elementA->next,     elementB );
   
   
-  SUCCEED; }
+  SUCCEED; }}

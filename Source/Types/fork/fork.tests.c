@@ -11,7 +11,7 @@ CEST(Fork, allocate) { auto struct fork * // »
   // This is an absolutely paltry test, but I don’t know what else I can do here. /=
   ASSERT_NOT_NULL( a_fork_struct );
   
-  SUCCEED; }
+  SUCCEED; }}
 
 CEST(Fork, initialize) { auto fork // »
   a_fork = Fork->allocate();
@@ -21,7 +21,7 @@ CEST(Fork, initialize) { auto fork // »
   ASSERT_NULL( a_fork->content->last );
   ASSERT_ZERO( a_fork->content->length );
   
-  SUCCEED; }
+  SUCCEED; }}
 
 CEST(fork, thing) { auto fork // »
   a_fork = Fork->create();
@@ -29,7 +29,7 @@ CEST(fork, thing) { auto fork // »
   ASSERT_EQUAL( Fork->thing(a_fork).pointer, a_fork );
   ASSERT_EQUAL( Fork->thing(a_fork).isa,     Fork->Fork );
   
-  SUCCEED; }
+  SUCCEED; }}
 
 CEST(fork, insert) { auto fork a_fork; auto thing thing1, thing2, thing3, thing4;
   a_fork = Fork->create();
@@ -58,7 +58,7 @@ CEST(fork, insert) { auto fork a_fork; auto thing thing1, thing2, thing3, thing4
   ASSERT_EQUAL( Fork->at(a_fork, 2).pointer, thing3.pointer );
   ASSERT_EQUAL( a_fork->content->length, 4 );
   
-  SUCCEED; }
+  SUCCEED; }}
 
 CEST(fork, prefix) { auto fork a_fork; auto thing thing1, thing2, thing3;
   a_fork = Fork->create();
@@ -78,7 +78,7 @@ CEST(fork, prefix) { auto fork a_fork; auto thing thing1, thing2, thing3;
   ASSERT_EQUAL( Fork->at(a_fork, 0).pointer, thing1.pointer );
   ASSERT_EQUAL( a_fork->content->length, 3 );
   
-  SUCCEED; }
+  SUCCEED; }}
 
 CEST(fork, affix) { auto fork a_fork; auto thing thing1, thing2, thing3;
   a_fork = Fork->create();
@@ -98,7 +98,7 @@ CEST(fork, affix) { auto fork a_fork; auto thing thing1, thing2, thing3;
   ASSERT_EQUAL( Fork->at(a_fork, 2).pointer, thing3.pointer );
   ASSERT_EQUAL( a_fork->content->length, 3 );
   
-  SUCCEED; }
+  SUCCEED; }}
 
 CEST(fork, at) { auto fork a_fork; auto thing thing1, thing2, thing3;
   a_fork = Fork->create();
@@ -122,4 +122,4 @@ CEST(fork, at) { auto fork a_fork; auto thing thing1, thing2, thing3;
   ASSERT_NULL( Fork->at(a_fork, 5).pointer );
   ASSERT_NULL( Fork->at(a_fork, 4).pointer );
   
-  SUCCEED; }
+  SUCCEED; }}
