@@ -123,7 +123,7 @@ void fork__affix(fork this, thing child)  {
 thing fork__at(fork this, ll_size idx) { auto element // »
   e = LL->at(this->content, idx);
   
-  if (e == NULL) return (thing){ {NULL} };
+  if (e == NULL) return (thing){ NULL };
             else return e->thing; }
 
 # endif //!defined(FORK_IMPLEMENTATION) && !defined(DECLARATIONS)
