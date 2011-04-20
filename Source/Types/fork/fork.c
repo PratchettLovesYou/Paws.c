@@ -67,6 +67,8 @@ static    thing           fork__at           (fork this,              ll_size id
                                  Fork         = NULL;
 void Paws__register_Fork(void) { Fork         = malloc(sizeof( struct Fork ));
                            Paws->Fork         = Fork;
+  Paws__register_Element();
+  Paws__register_LL();
   
   auto struct typeRepresentation // »
   type = { .family = Fork, .name = "fork" };
@@ -86,10 +88,7 @@ void Paws__register_Fork(void) { Fork         = malloc(sizeof( struct Fork ));
     .at           = fork__at };
   
   memcpy(data.Fork, &type, sizeof( struct typeRepresentation ));
-  memcpy(Fork,      &data, sizeof( struct Fork ));
-  
-  Paws__register_Element();
-  Paws__register_LL(); }
+  memcpy(Fork,      &data, sizeof( struct Fork )); }
 
 
 fork Fork__create(void) {
