@@ -1,0 +1,10 @@
+# Executables
+*.o
+!*.o/
+
+# Intermediary forms
+*.dSYM/
+*.i
+!*.i/
+*.s
+!*.s/
