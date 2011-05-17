@@ -25,9 +25,9 @@ struct E(Fork) {
   /// `Fork` family functions
 e(fork)               (*create)(void);
   struct e(fork) *    (*allocate)(void);
+e(fork)               (*initialize)   ( struct e(fork)* this );
   
   /// `struct fork` instance functions
-e(fork)               (*initialize)   ( struct e(fork)* this );
 e(thing)              (*thing)        ( e(fork) this );
                  void (*insert)       ( e(fork) this, e(thing) child, e(ll_size) idx );
                  void (*prefix)       ( e(fork) this, e(thing) child );
@@ -54,8 +54,8 @@ extern    void MAKE_EXTERNAL(register_Fork)(void);
 
 static    fork            Fork__create(void);
 static    struct fork *   Fork__allocate(void);
+static    fork            Fork__initialize   (fork this);
 
-static    fork            fork__initialize   (fork this);
 static    thing           fork__thing        (fork this);
 static               void fork__insert       (fork this, thing child, ll_size idx);
 static               void fork__prefix       (fork this, thing child);
@@ -79,8 +79,8 @@ void Paws__register_Fork(void) { Fork         = malloc(sizeof( struct Fork ));
     
     .create       = Fork__create,
     .allocate     = Fork__allocate,
+    .initialize   = Fork__initialize,
     
-    .initialize   = fork__initialize,
     .thing        = fork__thing,
     .insert       = fork__insert,
     .prefix       = fork__prefix,
@@ -97,7 +97,7 @@ fork Fork__create(void) {
 struct fork * Fork__allocate(void) {
   return malloc(sizeof( struct fork )); }
 
-fork fork__initialize(fork this) {
+fork Fork__initialize(fork this) {
   this->content = LL->create();
   
   return this; }

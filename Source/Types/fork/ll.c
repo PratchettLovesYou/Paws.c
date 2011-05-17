@@ -54,9 +54,9 @@ struct E(Element) {
   /// `Element` family functions
 e(element)              (*create)       ( e(thing) thing );
   struct e(element) *   (*allocate)(void);
+e(element)              (*initialize)   ( struct e(element)* this, e(thing) thing );
   
   /// `struct element` instance functions
-e(element)              (*initialize)   ( struct e(element)* this, e(thing) thing );
                    void (*prefix)       ( e(element) this, e(element) other );
                    void (*affix)        ( e(element) this, e(element) other );
 } IF_INTERNALIZED(extern *Element);
@@ -66,9 +66,9 @@ struct E(LL) {
   /// `LL` family functions
 e(ll)               (*create)(void);
   struct e(ll) *    (*allocate)(void);
+e(ll)               (*initialize)         ( struct e(ll)* this );
   
   /// `struct ll` instance functions
-e(ll)               (*initialize)         ( struct e(ll)* this );
                void (*anterior_insert)    ( e(ll) this, e(element) child, e(ll_size) idx );
                void (*posterior_insert)   ( e(ll) this, e(element) child, e(ll_size) idx );
                void (*prefix)             ( e(ll) this, e(element) child );
@@ -93,8 +93,8 @@ extern    void MAKE_EXTERNAL(register_LL)(void);
 
 static    element             Element__create        (thing thing);
 static    struct element *    Element__allocate(void);
+static    element             Element__initialize    (struct element* this, thing thing);
 
-static    element             element__initialize    (struct element* this, thing thing);
 static                   void element__prefix        (element this,         element other);
 static                   void element__affix         (element this,         element other);
 
@@ -107,8 +107,8 @@ void Paws__register_Element(void) { Element   = malloc(sizeof( struct Element ))
   data = {
     .create       = Element__create,
     .allocate     = Element__allocate,
+    .initialize   = Element__initialize,
     
-    .initialize   = element__initialize,
     .prefix       = element__prefix,
     .affix        = element__affix
   };
@@ -118,8 +118,8 @@ void Paws__register_Element(void) { Element   = malloc(sizeof( struct Element ))
 
 static    ll            LL__create(void);
 static    struct ll *   LL__allocate(void);
+static    ll            LL__initialize         (struct ll* this);
 
-static    ll            ll__initialize         (struct ll* this);
 static             void ll__anterior_insert    (ll this, element child, ll_size idx);
 static             void ll__posterior_insert   (ll this, element child, ll_size idx);
 static             void ll__prefix             (ll this, element child);
@@ -134,8 +134,8 @@ void Paws__register_LL(void) { LL   = malloc(sizeof( struct LL ));
   data = {
     .create             = LL__create,
     .allocate           = LL__allocate,
+    .initialize         = LL__initialize,
     
-    .initialize         = ll__initialize,
     .anterior_insert    = ll__anterior_insert,
     .posterior_insert   = ll__posterior_insert,
     .prefix             = ll__prefix,
@@ -157,7 +157,7 @@ element Element__create(thing target) {
 struct element * Element__allocate(void) {
   return malloc(sizeof( struct element )); }
 
-element element__initialize(struct element* this, thing target) {
+element Element__initialize(struct element* this, thing target) {
   this->next     = NULL;
   this->previous = NULL;
   memcpy(&this->thing, &target, sizeof( struct thing ));
@@ -215,7 +215,7 @@ ll LL__create(void) {
 struct ll * LL__allocate(void) {
   return malloc(sizeof( struct ll )); }
 
-ll ll__initialize(struct ll* this) {
+ll LL__initialize(struct ll* this) {
   this->first  = NULL;
   this->last   = NULL;
   this->length = 0;
