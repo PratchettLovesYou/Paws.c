@@ -125,7 +125,7 @@ struct Paws {
 } extern *Paws;
 
 
-extern    void    e(construct)   (void);
+extern                   void e(construct)(void);
 
 extern    bool    MAKE_EXTERNAL(constructed); // (see `void construct(void)` below.)
 
@@ -141,7 +141,7 @@ extern    bool    MAKE_EXTERNAL(constructed); // (see `void construct(void)` bel
 # undef  DECLARATIONS
 
 
-static    void    Paws__register_Paws    (void);
+static    void Paws__register_Paws(void);
 
                           struct Paws * // »
                                  Paws = NULL;
