@@ -52,28 +52,28 @@ struct e(ll) {
 struct E(Element) {
   // Functions ==============
   /// `Element` family functions
-e(element)              (*create)       ( e(thing) thing );
-  struct e(element) *   (*allocate)(void);
-e(element)              (*initialize)   ( struct e(element)* this, e(thing) thing );
+  e(element)                    (*create)             ( e(thing) thing );
+    struct e(element) *         (*allocate)(void);
+  e(element)                    (*initialize)         ( struct e(element)* this, e(thing) thing );
   
   /// `struct element` instance functions
-                   void (*prefix)       ( e(element) this, e(element) other );
-                   void (*affix)        ( e(element) this, e(element) other );
+                           void (*prefix)             ( e(element) this, e(element) other );
+                           void (*affix)              ( e(element) this, e(element) other );
 } IF_INTERNALIZED(extern *Element);
 
 struct E(LL) {
   // Functions ==============
   /// `LL` family functions
-e(ll)               (*create)(void);
-  struct e(ll) *    (*allocate)(void);
-e(ll)               (*initialize)         ( struct e(ll)* this );
+  e(ll)                   (*create)(void);
+    struct e(ll) *        (*allocate)(void);
+  e(ll)                   (*initialize)         ( struct e(ll)* this );
   
   /// `struct ll` instance functions
-               void (*anterior_insert)    ( e(ll) this, e(element) child, e(ll_size) idx );
-               void (*posterior_insert)   ( e(ll) this, e(element) child, e(ll_size) idx );
-               void (*prefix)             ( e(ll) this, e(element) child );
-               void (*affix)              ( e(ll) this, e(element) child );
-e(element)          (*at)                 ( e(ll) this,                   e(ll_size) idx );
+                     void (*anterior_insert)    ( e(ll) this, e(element) child, e(ll_size) idx );
+                     void (*posterior_insert)   ( e(ll) this, e(element) child, e(ll_size) idx );
+                     void (*prefix)             ( e(ll) this, e(element) child );
+                     void (*affix)              ( e(ll) this, e(element) child );
+  e(element)              (*at)                 ( e(ll) this,                   e(ll_size) idx );
 } IF_INTERNALIZED(extern *LL);
 
 extern    void MAKE_EXTERNAL(register_Element)(void);
@@ -91,12 +91,12 @@ extern    void MAKE_EXTERNAL(register_LL)(void);
 # undef  DECLARATIONS
 
 
-static    element             Element__create        (thing thing);
-static    struct element *    Element__allocate(void);
-static    element             Element__initialize    (struct element* this, thing thing);
+static element                  Element__create            (thing thing);
+static struct element *         Element__allocate(void);
+static element                  Element__initialize        (struct element* this, thing thing);
 
-static                   void element__prefix        (element this,         element other);
-static                   void element__affix         (element this,         element other);
+static                     void element__prefix            (element this,         element other);
+static                     void element__affix             (element this,         element other);
 
 
      IF_EXTERNALIZED(static) struct Element * // »
@@ -110,21 +110,20 @@ void Paws__register_Element(void) { Element   = malloc(sizeof( struct Element ))
     .initialize   = Element__initialize,
     
     .prefix       = element__prefix,
-    .affix        = element__affix
-  };
+    .affix        = element__affix };
   
   memcpy(Element, &data, sizeof( struct Element )); }
 
 
-static    ll            LL__create(void);
-static    struct ll *   LL__allocate(void);
-static    ll            LL__initialize         (struct ll* this);
+static ll                 LL__create(void);
+static struct ll *        LL__allocate(void);
+static ll                 LL__initialize         (struct ll* this);
 
-static             void ll__anterior_insert    (ll this, element child, ll_size idx);
-static             void ll__posterior_insert   (ll this, element child, ll_size idx);
-static             void ll__prefix             (ll this, element child);
-static             void ll__affix              (ll this, element child);
-static    element       ll__at                 (ll this,                ll_size idx);
+static               void ll__anterior_insert    (ll this, element child, ll_size idx);
+static               void ll__posterior_insert   (ll this, element child, ll_size idx);
+static               void ll__prefix             (ll this, element child);
+static               void ll__affix              (ll this, element child);
+static element            ll__at                 (ll this,                ll_size idx);
 
 IF_EXTERNALIZED(static) struct LL * // »
                                LL   = NULL;
@@ -140,8 +139,7 @@ void Paws__register_LL(void) { LL   = malloc(sizeof( struct LL ));
     .posterior_insert   = ll__posterior_insert,
     .prefix             = ll__prefix,
     .affix              = ll__affix,
-    .at                 = ll__at
-  };
+    .at                 = ll__at };
   
   memcpy(LL, &data, sizeof( struct LL )); }
 

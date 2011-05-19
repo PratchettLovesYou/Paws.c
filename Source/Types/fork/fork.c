@@ -19,20 +19,20 @@ struct e(fork) {
 
 
 struct E(Fork) {
-  typeRepresentation    Fork;
+    typeRepresentation    Fork;
   
   // Functions ==============
   /// `Fork` family functions
-e(fork)               (*create)(void);
-  struct e(fork) *    (*allocate)(void);
-e(fork)               (*initialize)   ( struct e(fork)* this );
+  e(fork)                   (*create)(void);
+    struct e(fork) *        (*allocate)(void);
+  e(fork)                   (*initialize)         ( struct e(fork)* this );
   
   /// `struct fork` instance functions
-e(thing)              (*thing)        ( e(fork) this );
-                 void (*insert)       ( e(fork) this, e(thing) child, e(ll_size) idx );
-                 void (*prefix)       ( e(fork) this, e(thing) child );
-                 void (*affix)        ( e(fork) this, e(thing) child );
-e(thing)              (*at)           ( e(fork) this,                 e(ll_size) idx );
+  e(thing)                  (*thing)              ( e(fork) this );
+                       void (*insert)             ( e(fork) this, e(thing) child, e(ll_size) idx );
+                       void (*prefix)             ( e(fork) this, e(thing) child );
+                       void (*affix)              ( e(fork) this, e(thing) child );
+  e(thing)                  (*at)                 ( e(fork) this,                 e(ll_size) idx );
 } IF_INTERNALIZED(extern *Fork);
 
 extern    void MAKE_EXTERNAL(register_Fork)(void);
@@ -52,21 +52,21 @@ extern    void MAKE_EXTERNAL(register_Fork)(void);
 # undef  DECLARATIONS
 
 
-static    fork            Fork__create(void);
-static    struct fork *   Fork__allocate(void);
-static    fork            Fork__initialize   (fork this);
+static fork                 Fork__create(void);
+static struct fork *        Fork__allocate(void);
+static fork                 Fork__initialize         (fork this);
 
-static    thing           fork__thing        (fork this);
-static               void fork__insert       (fork this, thing child, ll_size idx);
-static               void fork__prefix       (fork this, thing child);
-static               void fork__affix        (fork this, thing child);
-static    thing           fork__at           (fork this,              ll_size idx);
+static thing                fork__thing              (fork this);
+static                 void fork__insert             (fork this, thing child, ll_size idx);
+static                 void fork__prefix             (fork this, thing child);
+static                 void fork__affix              (fork this, thing child);
+static thing                fork__at                 (fork this,              ll_size idx);
 
 
   IF_EXTERNALIZED(static) struct Fork * // »
-                                 Fork         = NULL;
-void Paws__register_Fork(void) { Fork         = malloc(sizeof( struct Fork ));
-                           Paws->Fork         = Fork;
+                                 Fork   = NULL;
+void Paws__register_Fork(void) { Fork   = malloc(sizeof( struct Fork ));
+                           Paws->Fork   = Fork;
   Paws__register_Element();
   Paws__register_LL();
   
