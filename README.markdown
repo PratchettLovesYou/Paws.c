@@ -36,7 +36,7 @@ right now):
     C99 -ggdb   -IVendor -DCEST__NO_AUTO Vendor/Cest.c/Source/Cest.c   -ISource \
       Source/Types/fork/ll.tests.c \
       Source/Types/fork/fork.tests.c \
-    Source/Paws.tests.c && gdb -q -se ./Paws.tests.o
+    Source/Paws.tests.c && gdb -q -batch -x =(echo -e "run\nquit") -se ./Paws.tests.o
     
 ### Makefile
 This project will almost certainly never have a makefile. I love ISO C, and I love the CPP, so don’t
