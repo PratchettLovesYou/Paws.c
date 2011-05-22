@@ -1,6 +1,26 @@
 `Paws.c`
 ========
-Welcome to the new world.
+Paws is [@elliottcable][]’s programming language. The design is over a year old, but has gone through
+[many iterations][Strata] and changes. There is no working implementation, though several separate codebases are
+underway.
+
+This project is my reference implementation. It’s going to be absolutely non-performant at the outset; it is
+primarily intended to be an easy-to-peruse codebase that provides a *clean* API for embedding the interpreter
+into other projects (statically linked.)
+
+**If you’re interested in Paws, you should join the IRC channel.** There’s no coherent documentation on the
+underlying paradigm online; we’ve tried several times to compile such, and had no luck. It’s quite difficult to
+explain without an example interpreter to point people to, even on a one-on-basis; nearly impossible to do so
+with no example implementation *and* in a generalized anybody-who-reads-this form. (Yes, we know this situation
+sucks!)
+
+We’re always available in [**##Paws**][##Paws] on the Freenode IRC network ([click here][webchat] to immediately
+open a temporary IRC client.)
+
+  [@elliottcable]: http://twitter.com/elliottcable
+  [strata]: https://github.com/Paws/Paws.c/wiki/Strata
+  [##Paws]: irc://chat.freenode.net/##Paws
+  [webchat]: http://webchat.freenode.net?channels=%23%23Paws
 
 Spelunking
 ----------
